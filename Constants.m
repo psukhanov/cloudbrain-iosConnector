@@ -12,7 +12,7 @@
 
 NSString *const kHostName = @"http://rabbitmq.cloudbrain.rocks/";
 int const kPortNumber = 8080;
-NSString *const kExchangeUserName = @"cloudbrain";
+NSString *const kExchangeUsername = @"cloudbrain";
 NSString *const kExchangePassword = @"cloudbrain";
 
 @end

@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/test_tables.dir/test_tables.c.o  -o test_tables  ../librabbitmq/librabbitmq.a 

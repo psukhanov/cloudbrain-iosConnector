@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqps_producer.dir/amqps_producer.c.o CMakeFiles/amqps_producer.dir/utils.c.o CMakeFiles/amqps_producer.dir/unix/platform_utils.c.o  -o amqps_producer  ../librabbitmq/librabbitmq.4.1.4.dylib 

@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqps_exchange_declare.dir/amqps_exchange_declare.c.o CMakeFiles/amqps_exchange_declare.dir/utils.c.o CMakeFiles/amqps_exchange_declare.dir/unix/platform_utils.c.o  -o amqps_exchange_declare  ../librabbitmq/librabbitmq.4.1.4.dylib 

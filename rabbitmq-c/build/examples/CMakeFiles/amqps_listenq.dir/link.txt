@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqps_listenq.dir/amqps_listenq.c.o CMakeFiles/amqps_listenq.dir/utils.c.o CMakeFiles/amqps_listenq.dir/unix/platform_utils.c.o  -o amqps_listenq  ../librabbitmq/librabbitmq.4.1.4.dylib 

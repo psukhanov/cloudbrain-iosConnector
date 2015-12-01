@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/test_hostcheck.dir/test_hostcheck.c.o CMakeFiles/test_hostcheck.dir/__/librabbitmq/amqp_hostcheck.c.o  -o test_hostcheck  

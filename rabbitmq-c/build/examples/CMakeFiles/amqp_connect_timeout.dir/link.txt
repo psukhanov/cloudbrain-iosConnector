@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqp_connect_timeout.dir/amqp_connect_timeout.c.o CMakeFiles/amqp_connect_timeout.dir/utils.c.o CMakeFiles/amqp_connect_timeout.dir/unix/platform_utils.c.o  -o amqp_connect_timeout  ../librabbitmq/librabbitmq.4.1.4.dylib 

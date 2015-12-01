@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0055CB051BFEDE5200E7797C /* librabbitmq.4.1.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0055CB031BFEDE5200E7797C /* librabbitmq.4.1.4.dylib */; settings = {ASSET_TAGS = (); }; };
-		0055CB061BFEDE5200E7797C /* librabbitmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0055CB041BFEDE5200E7797C /* librabbitmq.a */; settings = {ASSET_TAGS = (); }; };
 		00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9558F1BFEA657001C2233 /* AMQPChannel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957951BFEA658001C2233 /* AMQPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955911BFEA657001C2233 /* AMQPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957961BFEA658001C2233 /* AMQPConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955931BFEA657001C2233 /* AMQPConsumer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -17,12 +15,26 @@
 		00B957991BFEA658001C2233 /* AMQPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9559A1BFEA657001C2233 /* AMQPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B9579A1BFEA658001C2233 /* AMQPObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9559C1BFEA657001C2233 /* AMQPObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B9579B1BFEA658001C2233 /* AMQPQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9559E1BFEA657001C2233 /* AMQPQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00B9579C1BFEA658001C2233 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00B955A01BFEA657001C2233 /* LICENSE */; settings = {ASSET_TAGS = (); }; };
-		00B9579D1BFEA658001C2233 /* LICENSE.gpl in Resources */ = {isa = PBXBuildFile; fileRef = 00B955A11BFEA657001C2233 /* LICENSE.gpl */; settings = {ASSET_TAGS = (); }; };
-		00B9579E1BFEA658001C2233 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 00B955A21BFEA657001C2233 /* README.md */; settings = {ASSET_TAGS = (); }; };
-		00B959011BFEA9C4001C2233 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959001BFEA9C4001C2233 /* Constants.m */; settings = {ASSET_TAGS = (); }; };
-		00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959031BFEAFB2001C2233 /* RabbitMQClient.m */; settings = {ASSET_TAGS = (); }; };
-		00B9593E1BFEC845001C2233 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00B959301BFEC845001C2233 /* CMakeLists.txt */; settings = {ASSET_TAGS = (); }; };
+		00B9579C1BFEA658001C2233 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00B955A01BFEA657001C2233 /* LICENSE */; };
+		00B9579D1BFEA658001C2233 /* LICENSE.gpl in Resources */ = {isa = PBXBuildFile; fileRef = 00B955A11BFEA657001C2233 /* LICENSE.gpl */; };
+		00B9579E1BFEA658001C2233 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 00B955A21BFEA657001C2233 /* README.md */; };
+		00B959011BFEA9C4001C2233 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959001BFEA9C4001C2233 /* Constants.m */; };
+		00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959031BFEAFB2001C2233 /* RabbitMQClient.m */; };
+		00B9593E1BFEC845001C2233 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00B959301BFEC845001C2233 /* CMakeLists.txt */; };
+		00E84BFC1C0E1FCA0015E0DC /* amqp_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BEF1C0E1FCA0015E0DC /* amqp_api.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84BFD1C0E1FCA0015E0DC /* amqp_connection.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF01C0E1FCA0015E0DC /* amqp_connection.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84BFE1C0E1FCA0015E0DC /* amqp_consumer.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF11C0E1FCA0015E0DC /* amqp_consumer.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84BFF1C0E1FCA0015E0DC /* amqp_framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF21C0E1FCA0015E0DC /* amqp_framing.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C001C0E1FCA0015E0DC /* amqp_hostcheck.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF31C0E1FCA0015E0DC /* amqp_hostcheck.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C011C0E1FCA0015E0DC /* amqp_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF41C0E1FCA0015E0DC /* amqp_mem.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C021C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF51C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C031C0E1FCA0015E0DC /* amqp_openssl.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF61C0E1FCA0015E0DC /* amqp_openssl.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C041C0E1FCA0015E0DC /* amqp_socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF71C0E1FCA0015E0DC /* amqp_socket.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C051C0E1FCA0015E0DC /* amqp_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF81C0E1FCA0015E0DC /* amqp_table.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C061C0E1FCA0015E0DC /* amqp_tcp_socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF91C0E1FCA0015E0DC /* amqp_tcp_socket.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C071C0E1FCA0015E0DC /* amqp_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C081C0E1FCA0015E0DC /* amqp_url.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
+		00E84C0A1C0E239B0015E0DC /* config.h in Sources */ = {isa = PBXBuildFile; fileRef = 00E84C091C0E233D0015E0DC /* config.h */; };
 		5401E01E1A93DA2600FADC22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E01D1A93DA2600FADC22 /* main.m */; };
 		5401E0211A93DA2600FADC22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0201A93DA2600FADC22 /* AppDelegate.m */; };
 		5401E0241A93DA2600FADC22 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0231A93DA2600FADC22 /* ViewController.m */; };
@@ -46,8 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0055CB031BFEDE5200E7797C /* librabbitmq.4.1.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = librabbitmq.4.1.4.dylib; sourceTree = "<group>"; };
-		0055CB041BFEDE5200E7797C /* librabbitmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librabbitmq.a; sourceTree = "<group>"; };
 		00B9558E1BFEA657001C2233 /* AMQPChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPChannel.h; sourceTree = "<group>"; };
 		00B9558F1BFEA657001C2233 /* AMQPChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMQPChannel.m; sourceTree = "<group>"; };
 		00B955901BFEA657001C2233 /* AMQPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPConnection.h; sourceTree = "<group>"; };
@@ -84,8 +94,21 @@
 		00B959001BFEA9C4001C2233 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../Constants.m; sourceTree = "<group>"; };
 		00B959021BFEAFB2001C2233 /* RabbitMQClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RabbitMQClient.h; path = ../RabbitMQClient.h; sourceTree = "<group>"; };
 		00B959031BFEAFB2001C2233 /* RabbitMQClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RabbitMQClient.m; path = ../RabbitMQClient.m; sourceTree = "<group>"; };
-		00B959081BFEBD6A001C2233 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../build/librabbitmq/config.h; sourceTree = "<group>"; };
 		00B959301BFEC845001C2233 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		00E84BEF1C0E1FCA0015E0DC /* amqp_api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_api.c; sourceTree = "<group>"; };
+		00E84BF01C0E1FCA0015E0DC /* amqp_connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_connection.c; sourceTree = "<group>"; };
+		00E84BF11C0E1FCA0015E0DC /* amqp_consumer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_consumer.c; sourceTree = "<group>"; };
+		00E84BF21C0E1FCA0015E0DC /* amqp_framing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_framing.c; sourceTree = "<group>"; };
+		00E84BF31C0E1FCA0015E0DC /* amqp_hostcheck.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_hostcheck.c; sourceTree = "<group>"; };
+		00E84BF41C0E1FCA0015E0DC /* amqp_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_mem.c; sourceTree = "<group>"; };
+		00E84BF51C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_openssl_hostname_validation.c; sourceTree = "<group>"; };
+		00E84BF61C0E1FCA0015E0DC /* amqp_openssl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_openssl.c; sourceTree = "<group>"; };
+		00E84BF71C0E1FCA0015E0DC /* amqp_socket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_socket.c; sourceTree = "<group>"; };
+		00E84BF81C0E1FCA0015E0DC /* amqp_table.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_table.c; sourceTree = "<group>"; };
+		00E84BF91C0E1FCA0015E0DC /* amqp_tcp_socket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_tcp_socket.c; sourceTree = "<group>"; };
+		00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_time.c; sourceTree = "<group>"; };
+		00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_url.c; sourceTree = "<group>"; };
+		00E84C091C0E233D0015E0DC /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../build/librabbitmq/config.h; sourceTree = "<group>"; };
 		5401E0181A93DA2600FADC22 /* MuseStatsIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseStatsIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5401E01C1A93DA2600FADC22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5401E01D1A93DA2600FADC22 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,8 +135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E91B78621B03B8A300082B2E /* libMuse.a in Frameworks */,
-				0055CB061BFEDE5200E7797C /* librabbitmq.a in Frameworks */,
-				0055CB051BFEDE5200E7797C /* librabbitmq.4.1.4.dylib in Frameworks */,
 				E94FB6F01B03B53400B73B4B /* libc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +200,20 @@
 		00B9573F1BFEA658001C2233 /* librabbitmq */ = {
 			isa = PBXGroup;
 			children = (
-				00B959081BFEBD6A001C2233 /* config.h */,
+				00E84BEF1C0E1FCA0015E0DC /* amqp_api.c */,
+				00E84C091C0E233D0015E0DC /* config.h */,
+				00E84BF01C0E1FCA0015E0DC /* amqp_connection.c */,
+				00E84BF11C0E1FCA0015E0DC /* amqp_consumer.c */,
+				00E84BF21C0E1FCA0015E0DC /* amqp_framing.c */,
+				00E84BF31C0E1FCA0015E0DC /* amqp_hostcheck.c */,
+				00E84BF41C0E1FCA0015E0DC /* amqp_mem.c */,
+				00E84BF51C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c */,
+				00E84BF61C0E1FCA0015E0DC /* amqp_openssl.c */,
+				00E84BF71C0E1FCA0015E0DC /* amqp_socket.c */,
+				00E84BF81C0E1FCA0015E0DC /* amqp_table.c */,
+				00E84BF91C0E1FCA0015E0DC /* amqp_tcp_socket.c */,
+				00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */,
+				00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */,
 				00B959301BFEC845001C2233 /* CMakeLists.txt */,
 				00B957401BFEA658001C2233 /* amqp.h */,
 				00B957451BFEA658001C2233 /* amqp_framing.h */,
@@ -208,8 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				E91B78631B03B8F500082B2E /* Muse.h */,
-				0055CB031BFEDE5200E7797C /* librabbitmq.4.1.4.dylib */,
-				0055CB041BFEDE5200E7797C /* librabbitmq.a */,
 				00B9558C1BFEA657001C2233 /* cloudbrain-iosConnector */,
 				00B958FF1BFEA9C4001C2233 /* Constants.h */,
 				00B959001BFEA9C4001C2233 /* Constants.m */,
@@ -383,19 +415,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E84C0A1C0E239B0015E0DC /* config.h in Sources */,
 				00B959011BFEA9C4001C2233 /* Constants.m in Sources */,
+				00E84C061C0E1FCA0015E0DC /* amqp_tcp_socket.c in Sources */,
 				00B957951BFEA658001C2233 /* AMQPConnection.m in Sources */,
 				00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */,
+				00E84BFC1C0E1FCA0015E0DC /* amqp_api.c in Sources */,
 				00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */,
+				00E84C021C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c in Sources */,
 				00B957971BFEA658001C2233 /* AMQPConsumerThread.m in Sources */,
 				5401E0241A93DA2600FADC22 /* ViewController.m in Sources */,
+				00E84BFD1C0E1FCA0015E0DC /* amqp_connection.c in Sources */,
+				00E84BFE1C0E1FCA0015E0DC /* amqp_consumer.c in Sources */,
+				00E84C011C0E1FCA0015E0DC /* amqp_mem.c in Sources */,
 				00B9579E1BFEA658001C2233 /* README.md in Sources */,
 				54EB6BC91AA0EAA3000D8142 /* LoggingListener.m in Sources */,
 				00B957961BFEA658001C2233 /* AMQPConsumer.m in Sources */,
 				00B957981BFEA658001C2233 /* AMQPExchange.m in Sources */,
+				00E84BFF1C0E1FCA0015E0DC /* amqp_framing.c in Sources */,
 				5401E0211A93DA2600FADC22 /* AppDelegate.m in Sources */,
+				00E84C001C0E1FCA0015E0DC /* amqp_hostcheck.c in Sources */,
 				00B957991BFEA658001C2233 /* AMQPMessage.m in Sources */,
+				00E84C081C0E1FCA0015E0DC /* amqp_url.c in Sources */,
+				00E84C051C0E1FCA0015E0DC /* amqp_table.c in Sources */,
 				00B9579A1BFEA658001C2233 /* AMQPObject.m in Sources */,
+				00E84C031C0E1FCA0015E0DC /* amqp_openssl.c in Sources */,
+				00E84C071C0E1FCA0015E0DC /* amqp_time.c in Sources */,
+				00E84C041C0E1FCA0015E0DC /* amqp_socket.c in Sources */,
 				00B9579B1BFEA658001C2233 /* AMQPQueue.m in Sources */,
 				5401E01E1A93DA2600FADC22 /* main.m in Sources */,
 			);
@@ -521,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -535,6 +582,7 @@
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neurotechx.cloudbrain-connector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -543,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -557,6 +606,7 @@
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.neurotechx.cloudbrain-connector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

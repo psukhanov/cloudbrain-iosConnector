@@ -24,8 +24,18 @@
 
 - (instancetype)initWithDelegate:(AppDelegate *)delegate {
     _delegate = delegate;
-    RabbitMQClient *client = [RabbitMQClient sharedClient];
-    [client sendData:@"test" OnExchangeName:[self exchangeName]];
+    
+    @try {
+        RabbitMQClient *client = [RabbitMQClient sharedClient];
+        [client sendData:@"test" OnExchangeName:[self exchangeName]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"e:%@",exception);
+    }
+    @finally {
+        
+    }
+    
     /**
      * Set <key>UIFileSharingEnabled</key> to true in Info.plist if you want
      * to see the file in iTunes

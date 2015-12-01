@@ -10,9 +10,9 @@
 
 @interface Constants : NSObject
 
-FOUNDATION_EXPORT NSString *const kHostName;
-FOUNDATION_EXPORT int const kPortNumber;
-FOUNDATION_EXPORT NSString *const kExchangeUsername;
-FOUNDATION_EXPORT NSString *const kExchangePassword;
+extern NSString *const kHostName;
+extern int const kPortNumber;
+extern NSString *const kExchangeUsername;
+extern NSString *const kExchangePassword;
 
 @end

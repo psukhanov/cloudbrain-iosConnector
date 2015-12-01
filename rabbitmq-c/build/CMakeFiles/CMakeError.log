@@ -1,0 +1,34 @@
+Determining if the function clock_gettime exists in the rt failed with the following output:
+Change Dir: /Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1a144/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_1a144.dir/build.make CMakeFiles/cmTC_1a144.dir/build
+Building C object CMakeFiles/cmTC_1a144.dir/CheckFunctionExists.c.o
+/usr/bin/gcc    -std=gnu90 -DCHECK_FUNCTION_EXISTS=clock_gettime -arch i386   -o CMakeFiles/cmTC_1a144.dir/CheckFunctionExists.c.o   -c /Applications/CMake.app/Contents/share/cmake-3.4/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1a144
+/Applications/CMake.app/Contents/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1a144.dir/link.txt --verbose=1
+/usr/bin/gcc   -std=gnu90 -DCHECK_FUNCTION_EXISTS=clock_gettime -arch i386 -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_1a144.dir/CheckFunctionExists.c.o  -o cmTC_1a144  -L/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp/time.h  -lrt 
+ld: warning: directory not found for option '-L/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp/time.h'
+ld: library not found for -lrt
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [cmTC_1a144] Error 1
+make: *** [cmTC_1a144/fast] Error 2
+
+
+Determining if the function posix_spawnp exists in the rt failed with the following output:
+Change Dir: /Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f0c88/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_f0c88.dir/build.make CMakeFiles/cmTC_f0c88.dir/build
+Building C object CMakeFiles/cmTC_f0c88.dir/CheckFunctionExists.c.o
+/usr/bin/gcc    -std=gnu90 -DCHECK_FUNCTION_EXISTS=posix_spawnp -arch i386   -o CMakeFiles/cmTC_f0c88.dir/CheckFunctionExists.c.o   -c /Applications/CMake.app/Contents/share/cmake-3.4/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f0c88
+/Applications/CMake.app/Contents/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f0c88.dir/link.txt --verbose=1
+/usr/bin/gcc   -std=gnu90 -DCHECK_FUNCTION_EXISTS=posix_spawnp -arch i386 -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_f0c88.dir/CheckFunctionExists.c.o  -o cmTC_f0c88  -L/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp/spawn.h  -lrt 
+ld: warning: directory not found for option '-L/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/build/CMakeFiles/CMakeTmp/spawn.h'
+ld: library not found for -lrt
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [cmTC_f0c88] Error 1
+make: *** [cmTC_f0c88/fast] Error 2
+
+

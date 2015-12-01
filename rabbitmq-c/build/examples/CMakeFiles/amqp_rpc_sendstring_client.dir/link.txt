@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqp_rpc_sendstring_client.dir/amqp_rpc_sendstring_client.c.o CMakeFiles/amqp_rpc_sendstring_client.dir/utils.c.o CMakeFiles/amqp_rpc_sendstring_client.dir/unix/platform_utils.c.o  -o amqp_rpc_sendstring_client  ../librabbitmq/librabbitmq.4.1.4.dylib 

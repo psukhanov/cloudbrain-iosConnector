@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../librabbitmq/amqp_hostcheck.h
+
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/librabbitmq/amqp_hostcheck.c
+amqp_hostcheck.h
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/librabbitmq/amqp_hostcheck.h
+string.h
+-
+
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/librabbitmq/amqp_hostcheck.h
+
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/tests/test_hostcheck.c
+config.h
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/tests/config.h
+amqp_hostcheck.h
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/tests/amqp_hostcheck.h
+stdio.h
+-
+stdlib.h
+-
+
+librabbitmq/config.h
+

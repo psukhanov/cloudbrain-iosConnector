@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../librabbitmq/amqp.h
+sys/types.h
+-
+stddef.h
+-
+stdint.h
+-
+amqp_framing.h
+../librabbitmq/amqp_framing.h
+
+../librabbitmq/amqp_framing.h
+amqp.h
+../librabbitmq/amqp.h
+
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/tests/test_tables.c
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+stdarg.h
+-
+errno.h
+-
+inttypes.h
+-
+amqp.h
+/Users/a/code/cloudbrain-iosConnector/rabbitmq-c/tests/amqp.h
+math.h
+-
+

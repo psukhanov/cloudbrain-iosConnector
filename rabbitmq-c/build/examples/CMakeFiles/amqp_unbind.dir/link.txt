@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/amqp_unbind.dir/amqp_unbind.c.o CMakeFiles/amqp_unbind.dir/utils.c.o CMakeFiles/amqp_unbind.dir/unix/platform_utils.c.o  -o amqp_unbind  ../librabbitmq/librabbitmq.4.1.4.dylib 

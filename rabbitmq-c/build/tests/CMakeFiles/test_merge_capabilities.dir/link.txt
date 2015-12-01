@@ -1,0 +1,1 @@
+/usr/bin/gcc   -std=gnu90 -arch i386 -Wl,-headerpad_max_install_names  CMakeFiles/test_merge_capabilities.dir/test_merge_capabilities.c.o  -o test_merge_capabilities  ../librabbitmq/librabbitmq.a 
