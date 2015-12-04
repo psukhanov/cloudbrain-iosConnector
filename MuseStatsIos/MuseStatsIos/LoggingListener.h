@@ -12,8 +12,6 @@
     IXNMuseDataListener, IXNMuseConnectionListener
 >
 
-//@property (nonatomic, retain) RabbitMQClient *rabbitMQClient;
-
 // Designated initializer.
 - (instancetype)initWithDelegate:(AppDelegate *)delegate;
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet;

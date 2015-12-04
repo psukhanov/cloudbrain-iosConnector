@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "AMQPConnection.h"
+#import "AMQPExchange.h"
 
 @interface RabbitMQClient : NSObject
 
 @property (nonatomic) AMQPConnection *connection;
+@property (nonatomic) AMQPExchange *exchange;
 
 + (id)sharedClient;
+-(void)setupWithExchangeName:(NSString*)exchangeName;
+
 -(void)sendData:(NSString *)payload OnExchangeName:(NSString*)exchangeName;
 
 @end

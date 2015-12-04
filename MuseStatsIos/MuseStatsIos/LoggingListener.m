@@ -17,6 +17,7 @@
 @property (nonatomic) id<IXNMuseFileWriter> fileWriter;
 
 @property (nonatomic) NSString *deviceName, *deviceType, *metric;
+@property (nonatomic, weak) RabbitMQClient *rmqclient;
 
 @end
 
@@ -27,6 +28,8 @@
     _deviceName = @"Paul-Muse";
     _deviceType = @"muse";
     _metric = @"eeg";
+    _rmqclient = [RabbitMQClient sharedClient];
+    [_rmqclient setupWithExchangeName:[self exchangeName]];
     
     @try {
         RabbitMQClient *client = [RabbitMQClient sharedClient];
@@ -37,7 +40,7 @@
         NSLog(@"e:%@",exception);
     }
     @finally {
-        
+        NSLog(@"sent RabbitMQ message");
     }
 
     /**
@@ -63,16 +66,32 @@
             break;
         case IXNMuseDataPacketTypeAccelerometer:
             break;
-        case IXNMuseDataPacketTypeAlphaAbsolute:
+        case IXNMuseDataPacketTypeEeg:
         {
-            RabbitMQClient *client = [RabbitMQClient sharedClient];
-            
             NSArray *data = packet.values;
+            NSLog(@"data:%@",data);
+            
             NSInteger timestamp = packet.timestamp;
+            NSLog(@"timestamp:%lu",timestamp);
             
             NSString *payload = [data componentsJoinedByString:@" "];
             
-            [client sendData:payload OnExchangeName:[self exchangeName]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
+                NSLog(@"sent data");
+            });
+        }
+        case IXNMuseDataPacketTypeAlphaAbsolute:
+        {
+            /*NSArray *data = packet.values;
+            NSLog(@"data:%@",data);
+            
+            NSInteger timestamp = packet.timestamp;
+            NSLog(@"timestamp:%lu",timestamp);
+            
+            NSString *payload = [data componentsJoinedByString:@" "];*/
+            
+            //[client sendData:payload OnExchangeName:[self exchangeName]];
         }
         case IXNMuseDataPacketTypeBetaAbsolute:
             break;
