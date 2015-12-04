@@ -34,8 +34,10 @@
 
 -(void)sendData:(NSString *)payload OnExchangeName:(NSString*)exchangeName
 {
+    
     [self.connection connectToHost:kHostName onPort:kPortNumber];
-    [self.connection loginAsUser:kExchangeUsername withPasswort:kExchangePassword onVHost:@""];
+    
+    [self.connection loginAsUser:kExchangeUsername withPasswort:kExchangePassword onVHost:@"/"];
 
     AMQPChannel *channel = [self.connection openChannel];
     

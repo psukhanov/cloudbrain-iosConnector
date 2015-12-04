@@ -45,7 +45,7 @@
 }
 - (id)initDirectExchangeWithName:(NSString*)theName onChannel:(AMQPChannel*)theChannel isPassive:(BOOL)passive isDurable:(BOOL)durable getsAutoDeleted:(BOOL)autoDelete
 {
-	return [self initExchangeOfType:@"AMQP_EXCHANGE_TYPE_DIRECT" withName:theName onChannel:theChannel isPassive:passive isDurable:durable getsAutoDeleted:autoDelete];
+	return [self initExchangeOfType:@"direct" withName:theName onChannel:theChannel isPassive:passive isDurable:durable getsAutoDeleted:autoDelete];
 }
 - (id)initFanoutExchangeWithName:(NSString*)theName onChannel:(AMQPChannel*)theChannel isPassive:(BOOL)passive isDurable:(BOOL)durable getsAutoDeleted:(BOOL)autoDelete
 {

@@ -24,18 +24,22 @@
 
 - (instancetype)initWithDelegate:(AppDelegate *)delegate {
     _delegate = delegate;
+    _deviceName = @"Paul-Muse";
+    _deviceType = @"muse";
+    _metric = @"eeg";
     
     @try {
         RabbitMQClient *client = [RabbitMQClient sharedClient];
         [client sendData:@"test" OnExchangeName:[self exchangeName]];
-    }
+        
+   }
     @catch (NSException *exception) {
         NSLog(@"e:%@",exception);
     }
     @finally {
         
     }
-    
+
     /**
      * Set <key>UIFileSharingEnabled</key> to true in Info.plist if you want
      * to see the file in iTunes
@@ -60,8 +64,6 @@
         case IXNMuseDataPacketTypeAccelerometer:
             break;
         case IXNMuseDataPacketTypeAlphaAbsolute:
-            break;
-        case IXNMuseDataPacketTypeBetaAbsolute:
         {
             RabbitMQClient *client = [RabbitMQClient sharedClient];
             
@@ -71,8 +73,8 @@
             NSString *payload = [data componentsJoinedByString:@" "];
             
             [client sendData:payload OnExchangeName:[self exchangeName]];
-            
         }
+        case IXNMuseDataPacketTypeBetaAbsolute:
             break;
         default:
             break;
