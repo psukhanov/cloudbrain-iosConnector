@@ -34,13 +34,24 @@
 
 -(void)setupWithExchangeName:(NSString*)exchangeName
 {
-    [self.connection connectToHost:kHostName onPort:kPortNumber];
     
-    [self.connection loginAsUser:kExchangeUsername withPasswort:kExchangePassword onVHost:@"/"];
+    @try {
+        [self.connection connectToHost:kHostName onPort:kPortNumber];
+        
+        [self.connection loginAsUser:kExchangeUsername withPasswort:kExchangePassword onVHost:@"/"];
+        
+        AMQPChannel *channel = [self.connection openChannel];
+        
+        self.exchange = [[AMQPExchange alloc] initDirectExchangeWithName:exchangeName onChannel:channel isPassive:YES isDurable:NO getsAutoDeleted:NO];
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception: %@",exception);
+    }
+    @finally {
+        
+    }
     
-    AMQPChannel *channel = [self.connection openChannel];
-    
-    self.exchange = [[AMQPExchange alloc] initDirectExchangeWithName:exchangeName onChannel:channel isPassive:NO isDurable:YES getsAutoDeleted:NO];
 }
 
 -(void)sendData:(NSString *)payload OnExchangeName:(NSString*)exchangeName

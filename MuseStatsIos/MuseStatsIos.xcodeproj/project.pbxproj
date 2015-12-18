@@ -21,6 +21,8 @@
 		00B959011BFEA9C4001C2233 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959001BFEA9C4001C2233 /* Constants.m */; };
 		00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B959031BFEAFB2001C2233 /* RabbitMQClient.m */; };
 		00B9593E1BFEC845001C2233 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00B959301BFEC845001C2233 /* CMakeLists.txt */; };
+		00CF0E001C1D3D85009DFF4B /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CF0DFF1C1D3D85009DFF4B /* AudioPlayer.m */; };
+		00CF0E021C1D3E1D009DFF4B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CF0E011C1D3E1D009DFF4B /* CoreAudio.framework */; };
 		00E84BFC1C0E1FCA0015E0DC /* amqp_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BEF1C0E1FCA0015E0DC /* amqp_api.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84BFD1C0E1FCA0015E0DC /* amqp_connection.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF01C0E1FCA0015E0DC /* amqp_connection.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84BFE1C0E1FCA0015E0DC /* amqp_consumer.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BF11C0E1FCA0015E0DC /* amqp_consumer.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
@@ -95,6 +97,9 @@
 		00B959021BFEAFB2001C2233 /* RabbitMQClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RabbitMQClient.h; path = ../RabbitMQClient.h; sourceTree = "<group>"; };
 		00B959031BFEAFB2001C2233 /* RabbitMQClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RabbitMQClient.m; path = ../RabbitMQClient.m; sourceTree = "<group>"; };
 		00B959301BFEC845001C2233 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		00CF0DFE1C1D3D85009DFF4B /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		00CF0DFF1C1D3D85009DFF4B /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		00CF0E011C1D3E1D009DFF4B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		00E84BEF1C0E1FCA0015E0DC /* amqp_api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_api.c; sourceTree = "<group>"; };
 		00E84BF01C0E1FCA0015E0DC /* amqp_connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_connection.c; sourceTree = "<group>"; };
 		00E84BF11C0E1FCA0015E0DC /* amqp_consumer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_consumer.c; sourceTree = "<group>"; };
@@ -134,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CF0E021C1D3E1D009DFF4B /* CoreAudio.framework in Frameworks */,
 				E91B78621B03B8A300082B2E /* libMuse.a in Frameworks */,
 				E94FB6F01B03B53400B73B4B /* libc++.dylib in Frameworks */,
 			);
@@ -241,6 +247,7 @@
 		5401E00F1A93DA2600FADC22 = {
 			isa = PBXGroup;
 			children = (
+				00CF0E011C1D3E1D009DFF4B /* CoreAudio.framework */,
 				E91B78631B03B8F500082B2E /* Muse.h */,
 				00B9558C1BFEA657001C2233 /* cloudbrain-iosConnector */,
 				00B958FF1BFEA9C4001C2233 /* Constants.h */,
@@ -276,6 +283,8 @@
 				5401E01B1A93DA2600FADC22 /* Supporting Files */,
 				54EB6BC71AA0EAA3000D8142 /* LoggingListener.h */,
 				54EB6BC81AA0EAA3000D8142 /* LoggingListener.m */,
+				00CF0DFE1C1D3D85009DFF4B /* AudioPlayer.h */,
+				00CF0DFF1C1D3D85009DFF4B /* AudioPlayer.m */,
 			);
 			name = MuseStatsIos;
 			path = MuseStatsIos/MuseStatsIos;
@@ -422,6 +431,7 @@
 				00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */,
 				00E84BFC1C0E1FCA0015E0DC /* amqp_api.c in Sources */,
 				00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */,
+				00CF0E001C1D3D85009DFF4B /* AudioPlayer.m in Sources */,
 				00E84C021C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c in Sources */,
 				00B957971BFEA658001C2233 /* AMQPConsumerThread.m in Sources */,
 				5401E0241A93DA2600FADC22 /* ViewController.m in Sources */,

@@ -10,7 +10,7 @@
 @interface AppDelegate ()
 
 @property (weak, nonatomic) IXNMuseManager *manager;
-@property (nonatomic) LoggingListener *loggingListener;
+//@property (nonatomic) LoggingListener *loggingListener;
 @property (nonatomic) NSTimer *musePickerTimer;
 
 @end
@@ -70,7 +70,7 @@
 
 - (void)startWithMuse:(id<IXNMuse>)muse {
     // Uncomment to test Muse File Reader
-//    [self playMuseFile];
+    [self playMuseFile];
     @synchronized (self.muse) {
         if (self.muse) {
             return;
@@ -85,7 +85,7 @@
                                type:IXNMuseDataPacketTypeBattery];
     [self.muse registerDataListener:self.loggingListener
                                type:IXNMuseDataPacketTypeAccelerometer];
-    [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeAlphaAbsolute];
+    //[self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeAlphaAbsolute];
     [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeEeg];
     
     [self.muse registerConnectionListener:self.loggingListener];
@@ -111,27 +111,44 @@
  */
 - (void)playMuseFile {
     NSLog(@"start play muse");
+    
+    NSMutableString *exportData = [[NSMutableString alloc] init];
+    NSMutableArray *files = [NSMutableArray array];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(
         NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath =
-        [documentsDirectory stringByAppendingPathComponent:@"testfile.muse"];
+        [documentsDirectory stringByAppendingPathComponent:@"new_muse_file.muse"];
     id<IXNMuseFileReader> fileReader =
             [IXNMuseFileFactory museFileReaderWithPathString:filePath];
     while ([fileReader gotoNextMessage]) {
         IXNMessageType type = [fileReader getMessageType];
         int id_number = [fileReader getMessageId];
         int64_t timestamp = [fileReader getMessageTimestamp];
-        NSLog(@"type: %d, id: %d, timestamp: %lld",
-             (int)type, id_number, timestamp);
+        /*NSLog(@"type: %d, id: %d, timestamp: %lld",
+             (int)type, id_number, timestamp);*/
+        
+        int session_num = 0;
+        
         switch(type) {
             case IXNMessageTypeEeg:
+            {
+                if (session_num > 0)
+                {
+                    IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                    [exportData appendFormat:@"%f",[packet.values[IXNEegTP9] doubleValue]];
+                
+                //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
+                }
+                break;
+            }
             case IXNMessageTypeQuantization:
             case IXNMessageTypeAccelerometer:
             case IXNMessageTypeBattery:
             {
                 IXNMuseDataPacket* packet = [fileReader getDataPacket];
-                NSLog(@"data packet = %d", (int)packet.packetType);
+                //NSLog(@"data packet = %d", (int)packet.packetType);
                 break;
             }
             case IXNMessageTypeVersion:
@@ -150,6 +167,17 @@
             {
                 IXNAnnotationData* annotation = [fileReader getAnnotation];
                 NSLog(@"annotation = %@", annotation.data);
+                
+                if ([annotation.data isEqualToString:@"session started"])
+                {
+                    session_num += 1;
+                }
+                else if ([annotation.data isEqualToString:@"session ended"])
+                {
+                    files[session_num] = exportData;
+                    exportData = [[NSMutableString alloc] init];
+                }
+                
                 break;
             }
             default:

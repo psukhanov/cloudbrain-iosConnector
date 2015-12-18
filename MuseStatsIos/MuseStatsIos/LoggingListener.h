@@ -17,5 +17,7 @@
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet;
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet;
 - (void)receiveMuseConnectionPacket:(IXNMuseConnectionPacket *)packet;
+-(void)startSession;
+-(void)endSession;
 
 @end
