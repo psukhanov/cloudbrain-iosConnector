@@ -11,8 +11,20 @@
 @interface Constants : NSObject
 
 extern NSString *const kHostName;
+extern NSString *const kMyndzpaceHost;
+
 extern int const kPortNumber;
 extern NSString *const kExchangeUsername;
 extern NSString *const kExchangePassword;
+
+extern NSString *const kSessionBaseFileName;
+
+extern NSString *const kRecordingMode;
+/*
+typedef enum recordingMode : NSUInteger {
+    kRecordingModeRemoteOffline,
+    kRecordingModeRemoteOnline,
+    kRecordingModeLocal
+} recordingMode;*/
 
 @end

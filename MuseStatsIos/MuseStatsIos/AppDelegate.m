@@ -70,7 +70,6 @@
 
 - (void)startWithMuse:(id<IXNMuse>)muse {
     // Uncomment to test Muse File Reader
-    [self playMuseFile];
     @synchronized (self.muse) {
         if (self.muse) {
             return;
@@ -109,82 +108,7 @@
 /*
  * Simple example of getting data from the "*.muse" file
  */
-- (void)playMuseFile {
-    NSLog(@"start play muse");
-    
-    NSMutableString *exportData = [[NSMutableString alloc] init];
-    NSMutableArray *files = [NSMutableArray array];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(
-        NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath =
-        [documentsDirectory stringByAppendingPathComponent:@"new_muse_file.muse"];
-    id<IXNMuseFileReader> fileReader =
-            [IXNMuseFileFactory museFileReaderWithPathString:filePath];
-    while ([fileReader gotoNextMessage]) {
-        IXNMessageType type = [fileReader getMessageType];
-        int id_number = [fileReader getMessageId];
-        int64_t timestamp = [fileReader getMessageTimestamp];
-        /*NSLog(@"type: %d, id: %d, timestamp: %lld",
-             (int)type, id_number, timestamp);*/
-        
-        int session_num = 0;
-        
-        switch(type) {
-            case IXNMessageTypeEeg:
-            {
-                if (session_num > 0)
-                {
-                    IXNMuseDataPacket* packet = [fileReader getDataPacket];
-                    [exportData appendFormat:@"%f",[packet.values[IXNEegTP9] doubleValue]];
-                
-                //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
-                }
-                break;
-            }
-            case IXNMessageTypeQuantization:
-            case IXNMessageTypeAccelerometer:
-            case IXNMessageTypeBattery:
-            {
-                IXNMuseDataPacket* packet = [fileReader getDataPacket];
-                //NSLog(@"data packet = %d", (int)packet.packetType);
-                break;
-            }
-            case IXNMessageTypeVersion:
-            {
-                IXNMuseVersion* version = [fileReader getVersion];
-                NSLog(@"version = %@", version.firmwareVersion);
-                break;
-            }
-            case IXNMessageTypeConfiguration:
-            {
-                IXNMuseConfiguration* config = [fileReader getConfiguration];
-                NSLog(@"configuration = %@", config.bluetoothMac);
-                break;
-            }
-            case IXNMessageTypeAnnotation:
-            {
-                IXNAnnotationData* annotation = [fileReader getAnnotation];
-                NSLog(@"annotation = %@", annotation.data);
-                
-                if ([annotation.data isEqualToString:@"session started"])
-                {
-                    session_num += 1;
-                }
-                else if ([annotation.data isEqualToString:@"session ended"])
-                {
-                    files[session_num] = exportData;
-                    exportData = [[NSMutableString alloc] init];
-                }
-                
-                break;
-            }
-            default:
-                break;
-        }
-    }
-}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

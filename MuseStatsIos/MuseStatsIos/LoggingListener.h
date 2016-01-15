@@ -8,9 +8,15 @@
 #import "AppDelegate.h"
 #import "RabbitMQClient.h"
 
+@class ViewController;
+
 @interface LoggingListener : NSObject<
     IXNMuseDataListener, IXNMuseConnectionListener
 >
+
+@property BOOL shouldRecordData;
+@property NSMutableArray *arrBuffer;
+@property (nonatomic, weak) ViewController *viewController;
 
 // Designated initializer.
 - (instancetype)initWithDelegate:(AppDelegate *)delegate;

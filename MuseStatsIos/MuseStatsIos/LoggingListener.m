@@ -5,6 +5,8 @@
 
 #import "LoggingListener.h"
 #import "RabbitMQClient.h"
+#import "Constants.h"
+#import "ViewController.h"
 
 @interface LoggingListener () {
     dispatch_once_t _connectedOnceToken;
@@ -32,39 +34,15 @@
     _deviceType = @"muse";
     _metric = @"eeg";
     _saveFileName = @"MyFile";
+    _arrBuffer = [NSMutableArray array];
+    
+    _shouldRecordData = NO;
     
     _rmqclient = [RabbitMQClient sharedClient];
     [_rmqclient setupWithExchangeName:[self exchangeName]];
     
     @try {
         RabbitMQClient *client = [RabbitMQClient sharedClient];
-        
-        /*NSArray *test = @[@{@"timestamp":@57890,@"channel_0":@0,@"channel_1":@0,@"channel_2":@0,@"channel_3":@0}];
-        NSString *testString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:test options:0 error:nil] encoding:NSUTF8StringEncoding];
-        
-        [client sendData:testString OnExchangeName:[self exchangeName]];
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *appFile = [documentsDirectory stringByAppendingPathComponent:_saveFileName];
-
-        NSFileManager *outputFileManager = [NSFileManager defaultManager];
-        
-        if (![outputFileManager fileExistsAtPath: appFile])
-        {
-            NSLog (@"Output file does not exist, creating a new one");
-            [outputFileManager createFileAtPath: appFile
-                                       contents: nil
-                                     attributes: nil];
-        }
-        else {
-            NSError *fileReadError;
-            NSString *stringSoFar = [[NSString alloc] initWithContentsOfFile:appFile encoding:NSUTF8StringEncoding error:&fileReadError];
-            NSLog(@"saved data so far:%@",stringSoFar);
-        }
-        
-        _saveFile = [NSFileHandle fileHandleForWritingAtPath:appFile];
-        [_saveFile seekToEndOfFile];*/
         
    }
     @catch (NSException *exception) {
@@ -79,60 +57,61 @@
      * to see the file in iTunes
      */
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(
-        NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath =
-        [documentsDirectory stringByAppendingPathComponent:@"new_muse_file.muse"];
-    self.fileWriter = [IXNMuseFileFactory museFileWriterWithPathString:filePath];
-    //[self.fileWriter addAnnotationString:1 annotation:@"fileWriter created"];
-    [self.fileWriter flush];
     return self;
 }
 
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet {
-    switch (packet.packetType) {
-        case IXNMuseDataPacketTypeBattery:
-            NSLog(@"battery packet received");
-            NSLog([NSString stringWithFormat:@"%f",[packet.values[IXNBatteryChargePercentageRemaining] doubleValue]]);
-            
-            [self.fileWriter addDataPacket:1 packet:packet];
-            break;
-        case IXNMuseDataPacketTypeAccelerometer:
-            break;
-        case IXNMuseDataPacketTypeEeg:
-        {
-            [self.fileWriter addDataPacket:IXNMuseDataPacketTypeEeg packet:packet];
+    
+    if (_shouldRecordData)
+    {
+        switch (packet.packetType) {
+            case IXNMuseDataPacketTypeBattery:
+                NSLog(@"battery packet received");
+                NSLog([NSString stringWithFormat:@"%f",[packet.values[IXNBatteryChargePercentageRemaining] doubleValue]]);
+                
+                [self.fileWriter addDataPacket:1 packet:packet];
+                break;
+            case IXNMuseDataPacketTypeAccelerometer:
+                break;
+            case IXNMuseDataPacketTypeEeg:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeEeg packet:packet];
 
-            /*NSArray *eegData = packet.values;
-            //NSLog(@"data:%@",data);
-            
-            NSNumber *timestamp = [NSNumber numberWithLongLong:packet.timestamp / 1000.0f];
-            //NSLog(@"timestamp:%lu",timestamp);
-            
-            NSArray *send = @[@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]}];
-            
-            NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:send options:0 error:nil] encoding:NSUTF8StringEncoding];
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
-                //NSLog(@"sent data");
-            });
-            
-            NSData *data = [payload dataUsingEncoding:NSUTF8StringEncoding];
-            [_saveFile writeData:data];
-            */
-            
-            break;
+                NSArray *eegData = packet.values;
+                //NSLog(@"data:%@",data);
+                
+                //NSNumber *timestamp = [NSNumber numberWithLongLong:packet.timestamp / 1000.0f];
+                NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
+
+                //NSLog(@"timestamp:%lu",timestamp);
+                
+                [self.arrBuffer addObject:@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]}];
+                
+                if ([kRecordingMode isEqualToString:@"remote-online"]){
+                    
+                    if ([self.arrBuffer count] == 200){
+                        NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
+                        [self.arrBuffer removeAllObjects];
+
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                            [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
+                            //NSLog(@"sent data");
+                        });
+                    }
+                }
+
+                
+                break;
+            }
+            case IXNMuseDataPacketTypeAlphaAbsolute:
+            {
+                break;
+            }
+            case IXNMuseDataPacketTypeBetaAbsolute:
+                break;
+            default:
+                break;
         }
-        case IXNMuseDataPacketTypeAlphaAbsolute:
-        {
-            break;
-        }
-        case IXNMuseDataPacketTypeBetaAbsolute:
-            break;
-        default:
-            break;
     }
 }
 
@@ -156,15 +135,15 @@
         case IXNConnectionStateDisconnected:
             state = @"disconnected";
             [self.fileWriter addAnnotationString:1 annotation:@"disconnected"];
-            [self.fileWriter flush];
+            [self endSession];
             break;
         case IXNConnectionStateConnected:
             state = @"connected";
-            [self.fileWriter addAnnotationString:1 annotation:@"connected"];
+            //[self.fileWriter addAnnotationString:1 annotation:@"connected"];
             break;
         case IXNConnectionStateConnecting:
             state = @"connecting";
-            [self.fileWriter addAnnotationString:1 annotation:@"connecting"];
+            //[self.fileWriter addAnnotationString:1 annotation:@"connecting"];
             break;
         case IXNConnectionStateNeedsUpdate: state = @"needs update"; break;
         case IXNConnectionStateUnknown: state = @"unknown"; break;
@@ -188,14 +167,60 @@
 
 -(void)startSession
 {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    NSArray *filelist= [filemgr directoryContentsAtPath:documentsDirectory];
+    
+    NSInteger maxSessionNum = 0;
+    for (NSString *filename in filelist)
+    {
+        NSArray *comps = [filename componentsSeparatedByString:@".muse"];
+        NSString *restOfName = [comps objectAtIndex:0];
+        NSString *sessionNum = [[restOfName componentsSeparatedByString:@"_"] objectAtIndex:1];
+        if ([sessionNum integerValue] > maxSessionNum)
+            maxSessionNum = [sessionNum integerValue];
+    }
+    
+    NSInteger newSessionNum = maxSessionNum + 1;
+    
+    NSString *filePath =
+    [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%ld%@",kSessionBaseFileName,(long)newSessionNum,@".muse"]];
+    
+    self.fileWriter = [IXNMuseFileFactory museFileWriterWithPathString:filePath];
+	[self.fileWriter addAnnotationString:1 annotation:@"fileWriter created"];
     [self.fileWriter flush];
-    [self.fileWriter addAnnotationString:2 annotation:@"session started"];
+
+    [self.fileWriter addAnnotationString:1 annotation:@"session started"];
+    _shouldRecordData = YES;
 }
 
 -(void)endSession
 {
-    [self.fileWriter addAnnotationString:3 annotation:@"session ended"];
+    [self.fileWriter addAnnotationString:1 annotation:@"session ended"];
     [self.fileWriter flush];
+    _shouldRecordData = NO;
+    
+    if ([kRecordingMode isEqualToString:@"remote-offline"])
+    {
+        if ([self.arrBuffer count] == 0)
+        {
+            [self.arrBuffer addObject:@{@"timestamp":@1452473072000,@"channel_0":@1,@"channel_1":@1,@"channel_2":@1,@"channel_3":@1}];
+        }
+        NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
+            //NSLog(@"sent data");
+            [self.arrBuffer removeAllObjects];
+
+        });
+    }
+    if (self.viewController)
+    {
+        [self.viewController loadData];
+    }
 }
 
 @end

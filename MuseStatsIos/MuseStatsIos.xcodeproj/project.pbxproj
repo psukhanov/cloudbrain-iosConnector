@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0081E4011C40B611002AEFF4 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0081E4001C40B611002AEFF4 /* SessionCell.m */; };
 		00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9558F1BFEA657001C2233 /* AMQPChannel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957951BFEA658001C2233 /* AMQPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955911BFEA657001C2233 /* AMQPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957961BFEA658001C2233 /* AMQPConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955931BFEA657001C2233 /* AMQPConsumer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -37,6 +38,7 @@
 		00E84C071C0E1FCA0015E0DC /* amqp_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84C081C0E1FCA0015E0DC /* amqp_url.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84C0A1C0E239B0015E0DC /* config.h in Sources */ = {isa = PBXBuildFile; fileRef = 00E84C091C0E233D0015E0DC /* config.h */; };
+		00EA836C1C45A1B1001F58D1 /* MSSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EA836B1C45A1B1001F58D1 /* MSSession.m */; };
 		5401E01E1A93DA2600FADC22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E01D1A93DA2600FADC22 /* main.m */; };
 		5401E0211A93DA2600FADC22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0201A93DA2600FADC22 /* AppDelegate.m */; };
 		5401E0241A93DA2600FADC22 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0231A93DA2600FADC22 /* ViewController.m */; };
@@ -45,6 +47,7 @@
 		5401E02C1A93DA2600FADC22 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5401E02A1A93DA2600FADC22 /* LaunchScreen.xib */; };
 		5401E0381A93DA2600FADC22 /* MuseStatsIosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0371A93DA2600FADC22 /* MuseStatsIosTests.m */; };
 		54EB6BC91AA0EAA3000D8142 /* LoggingListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EB6BC81AA0EAA3000D8142 /* LoggingListener.m */; };
+		623B82F0CF2B7297E3D03295 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D106E4C044F915CB874064 /* libPods.a */; };
 		E91B78621B03B8A300082B2E /* libMuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E91B78611B03B8A300082B2E /* libMuse.a */; };
 		E94FB6F01B03B53400B73B4B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E94FB6EF1B03B53400B73B4B /* libc++.dylib */; };
 /* End PBXBuildFile section */
@@ -60,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0081E3FF1C40B611002AEFF4 /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
+		0081E4001C40B611002AEFF4 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		00B9558E1BFEA657001C2233 /* AMQPChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPChannel.h; sourceTree = "<group>"; };
 		00B9558F1BFEA657001C2233 /* AMQPChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMQPChannel.m; sourceTree = "<group>"; };
 		00B955901BFEA657001C2233 /* AMQPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPConnection.h; sourceTree = "<group>"; };
@@ -114,6 +119,9 @@
 		00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_time.c; sourceTree = "<group>"; };
 		00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_url.c; sourceTree = "<group>"; };
 		00E84C091C0E233D0015E0DC /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../build/librabbitmq/config.h; sourceTree = "<group>"; };
+		00EA836A1C45A1B1001F58D1 /* MSSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSession.h; sourceTree = "<group>"; };
+		00EA836B1C45A1B1001F58D1 /* MSSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSession.m; sourceTree = "<group>"; };
+		3AFA93F19C3101A59D84E8F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5401E0181A93DA2600FADC22 /* MuseStatsIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseStatsIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5401E01C1A93DA2600FADC22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5401E01D1A93DA2600FADC22 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,9 +137,11 @@
 		5401E0371A93DA2600FADC22 /* MuseStatsIosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MuseStatsIosTests.m; sourceTree = "<group>"; };
 		54EB6BC71AA0EAA3000D8142 /* LoggingListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggingListener.h; sourceTree = "<group>"; };
 		54EB6BC81AA0EAA3000D8142 /* LoggingListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggingListener.m; sourceTree = "<group>"; };
+		84D106E4C044F915CB874064 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91B78611B03B8A300082B2E /* libMuse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMuse.a; sourceTree = "<group>"; };
 		E91B78631B03B8F500082B2E /* Muse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Muse.h; path = Headers/Muse/Muse.h; sourceTree = "<group>"; };
 		E94FB6EF1B03B53400B73B4B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		F859E88951EA79962D1D6DA2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +152,7 @@
 				00CF0E021C1D3E1D009DFF4B /* CoreAudio.framework in Frameworks */,
 				E91B78621B03B8A300082B2E /* libMuse.a in Frameworks */,
 				E94FB6F01B03B53400B73B4B /* libc++.dylib in Frameworks */,
+				623B82F0CF2B7297E3D03295 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +269,8 @@
 				E94FB6EF1B03B53400B73B4B /* libc++.dylib */,
 				5401E0341A93DA2600FADC22 /* MuseStatsIosTests */,
 				5401E0191A93DA2600FADC22 /* Products */,
+				91F4BA0403D427516742B593 /* Pods */,
+				79206337019A2F92EB8D22CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,11 +286,15 @@
 		5401E01A1A93DA2600FADC22 /* MuseStatsIos */ = {
 			isa = PBXGroup;
 			children = (
+				5401E0251A93DA2600FADC22 /* Main.storyboard */,
 				5401E01F1A93DA2600FADC22 /* AppDelegate.h */,
 				5401E0201A93DA2600FADC22 /* AppDelegate.m */,
+				00EA836A1C45A1B1001F58D1 /* MSSession.h */,
+				00EA836B1C45A1B1001F58D1 /* MSSession.m */,
 				5401E0221A93DA2600FADC22 /* ViewController.h */,
 				5401E0231A93DA2600FADC22 /* ViewController.m */,
-				5401E0251A93DA2600FADC22 /* Main.storyboard */,
+				0081E3FF1C40B611002AEFF4 /* SessionCell.h */,
+				0081E4001C40B611002AEFF4 /* SessionCell.m */,
 				5401E0281A93DA2600FADC22 /* Images.xcassets */,
 				5401E02A1A93DA2600FADC22 /* LaunchScreen.xib */,
 				5401E01B1A93DA2600FADC22 /* Supporting Files */,
@@ -316,6 +333,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		79206337019A2F92EB8D22CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84D106E4C044F915CB874064 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91F4BA0403D427516742B593 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3AFA93F19C3101A59D84E8F6 /* Pods.debug.xcconfig */,
+				F859E88951EA79962D1D6DA2 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,9 +357,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5401E03B1A93DA2600FADC22 /* Build configuration list for PBXNativeTarget "MuseStatsIos" */;
 			buildPhases = (
+				0BABFBE6AA2804F8DC24799A /* Check Pods Manifest.lock */,
 				5401E0141A93DA2600FADC22 /* Sources */,
 				5401E0151A93DA2600FADC22 /* Frameworks */,
 				5401E0161A93DA2600FADC22 /* Resources */,
+				2653E57A0BD53C098F014696 /* Embed Pods Frameworks */,
+				A4452B900A02C7E1D2334FF8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -419,6 +456,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BABFBE6AA2804F8DC24799A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2653E57A0BD53C098F014696 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4452B900A02C7E1D2334FF8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5401E0141A93DA2600FADC22 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -434,7 +519,9 @@
 				00CF0E001C1D3D85009DFF4B /* AudioPlayer.m in Sources */,
 				00E84C021C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c in Sources */,
 				00B957971BFEA658001C2233 /* AMQPConsumerThread.m in Sources */,
+				00EA836C1C45A1B1001F58D1 /* MSSession.m in Sources */,
 				5401E0241A93DA2600FADC22 /* ViewController.m in Sources */,
+				0081E4011C40B611002AEFF4 /* SessionCell.m in Sources */,
 				00E84BFD1C0E1FCA0015E0DC /* amqp_connection.c in Sources */,
 				00E84BFE1C0E1FCA0015E0DC /* amqp_consumer.c in Sources */,
 				00E84C011C0E1FCA0015E0DC /* amqp_mem.c in Sources */,
@@ -575,6 +662,7 @@
 		};
 		5401E03C1A93DA2600FADC22 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AFA93F19C3101A59D84E8F6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -585,13 +673,16 @@
 					/Users/a/anaconda/include,
 				);
 				INFOPLIST_FILE = MuseStatsIos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.neurotechx.cloudbrain-connector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -599,6 +690,7 @@
 		};
 		5401E03D1A93DA2600FADC22 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F859E88951EA79962D1D6DA2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -609,13 +701,16 @@
 					/Users/a/anaconda/include,
 				);
 				INFOPLIST_FILE = MuseStatsIos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.neurotechx.cloudbrain-connector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
