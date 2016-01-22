@@ -80,7 +80,6 @@
                 NSArray *eegData = packet.values;
                 //NSLog(@"data:%@",data);
                 
-                //NSNumber *timestamp = [NSNumber numberWithLongLong:packet.timestamp / 1000.0f];
                 NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
 
                 //NSLog(@"timestamp:%lu",timestamp);
@@ -99,7 +98,6 @@
                         });
                     }
                 }
-
                 
                 break;
             }

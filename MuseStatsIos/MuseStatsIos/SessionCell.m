@@ -9,6 +9,7 @@
 #import "SessionCell.h"
 #import <AFNetworking/AFNetworking.h>
 #import "Constants.h"
+#import "Muse.h"
 
 @implementation SessionCell
 
@@ -55,7 +56,7 @@
 
 -(void)exportSessionData
 {
-    NSArray *arr = [self.sessionData objectForKey:@"data"];
+    NSArray *arr = [self museFileToData];
     NSString *filename = [self.sessionData objectForKey:@"fileName"];
     
     NSDictionary *data = @{@"data":arr,@"filename":filename};
@@ -73,30 +74,18 @@
     [req setHTTPMethod:@"POST"];
     //[req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [req setHTTPBody:[NSJSONSerialization dataWithJSONObject:data options:0 error:nil]];
-    
-    NSURLSession *sesh = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *task =  [sesh uploadTaskWithRequest:req fromData:[json dataUsingEncoding:NSUTF8StringEncoding] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-       NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-   }];
-    //[task resume];
+
     
     [self.btnExport setUserInteractionEnabled:NO];
     self.uploadProgress = 0;
     NSURLConnection *connec = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:YES];
     
-    /*AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:URLString]];
     
-    //manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager POST:@"" parameters:arr progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"post succeeded");
-        NSLog(responseObject);
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"post failed");
-        NSLog(error);
-    }];*/
+    /*NSURLSession *sesh = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+     NSURLSessionUploadTask *task =  [sesh uploadTaskWithRequest:req fromData:[json dataUsingEncoding:NSUTF8StringEncoding] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+     NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+     }];
+     [task resume];*/
 }
 
 /*-(void)exportSessionDataAsFile
@@ -144,5 +133,80 @@
     
     NSLog(@"export failed with error:%@",error);
 }
+
+- (NSArray*)museFileToData{
+    NSLog(@"start play muse");
+    
+    NSMutableArray *exportData = [[NSMutableArray alloc] init];
+    NSMutableString *strFileData = [[NSMutableString alloc] init];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(
+                                                         NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filename = [self.sessionData objectForKey:@"fileName"];
+    NSString *filePath =
+    [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    id<IXNMuseFileReader> fileReader =
+    [IXNMuseFileFactory museFileReaderWithPathString:filePath];
+
+    while ([fileReader gotoNextMessage]) {
+        IXNMessageType type = [fileReader getMessageType];
+        
+        /*NSLog(@"type: %d, id: %d, timestamp: %lld",
+         (int)type, id_number, timestamp);*/
+        
+        switch(type) {
+            case IXNMessageTypeEeg:
+            {
+                IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                NSArray *eegData = packet.values;
+                //NSLog(@"orig time:%lld",packet.timestamp);
+                
+                NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
+                //NSLog(@"timestamp:%@",timestamp);
+                
+                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]};
+                
+                [exportData addObject:send];
+                [strFileData appendFormat:@"%@ %@ %@ %@\n",eegData[0],eegData[1],eegData[2],eegData[3]];
+                
+                //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
+                break;
+            }
+            case IXNMessageTypeQuantization:
+            case IXNMessageTypeAccelerometer:
+            case IXNMessageTypeBattery:
+            {
+                IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                //NSLog(@"data packet = %d", (int)packet.packetType);
+                break;
+            }
+            case IXNMessageTypeVersion:
+            {
+                IXNMuseVersion* version = [fileReader getVersion];
+                NSLog(@"version = %@", version.firmwareVersion);
+                break;
+            }
+            case IXNMessageTypeConfiguration:
+            {
+                IXNMuseConfiguration* config = [fileReader getConfiguration];
+                NSLog(@"configuration = %@", config.bluetoothMac);
+                break;
+            }
+            case IXNMessageTypeAnnotation:
+            {
+                IXNAnnotationData *annotation = [fileReader getAnnotation];
+                NSLog(@"annotation = %@", annotation.data);
+                
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    return exportData;
+}
+
 
 @end

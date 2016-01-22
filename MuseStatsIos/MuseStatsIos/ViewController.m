@@ -124,9 +124,6 @@
 - (NSDictionary*)museFileToData:(NSString*)fileName{
     NSLog(@"start play muse");
     
-    NSMutableArray *exportData = [[NSMutableArray alloc] init];
-    NSMutableString *strFileData = [[NSMutableString alloc] init];
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(
                                                          NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -155,18 +152,6 @@
         switch(type) {
             case IXNMessageTypeEeg:
             {
-                IXNMuseDataPacket* packet = [fileReader getDataPacket];
-                NSArray *eegData = packet.values;
-                //NSLog(@"orig time:%lld",packet.timestamp);
-                
-                NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
-                //NSLog(@"timestamp:%@",timestamp);
-                
-                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]};
-                [exportData addObject:send];
-                [strFileData appendFormat:@"%@ %@ %@ %@\n",eegData[0],eegData[1],eegData[2],eegData[3]];
-                
-                //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
                 break;
             }
             case IXNMessageTypeQuantization:
@@ -215,7 +200,7 @@
     
     NSNumber *size = [NSNumber numberWithUnsignedLong:[[NSData dataWithContentsOfFile:filePath] length]];
     
-    NSDictionary *sessionData = @{@"startDate":startDate, @"endDate":endDate, @"size":size,@"fileName":fileName, @"data":exportData, @"duration":strDuration, @"file":strFileData};
+    NSDictionary *sessionData = @{@"startDate":startDate, @"endDate":endDate, @"size":size,@"fileName":fileName, @"duration":strDuration};
     
     return  sessionData;
 }
