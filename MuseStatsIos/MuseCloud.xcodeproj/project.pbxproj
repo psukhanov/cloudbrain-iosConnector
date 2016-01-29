@@ -694,7 +694,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/a/anaconda/include,
+					include,
 				);
 				INFOPLIST_FILE = MuseStatsIos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -702,6 +702,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"\"$(SRCROOT)/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -722,7 +723,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/Users/a/anaconda/include,
+					include,
 				);
 				INFOPLIST_FILE = MuseStatsIos/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -730,6 +731,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"\"$(SRCROOT)/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
