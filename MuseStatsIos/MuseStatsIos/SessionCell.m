@@ -208,4 +208,26 @@
 }
 
 
+- (IBAction)exportToCloudStorageTapped:(id)sender {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(
+                                                         NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filename = [self.sessionData objectForKey:@"fileName"];
+    NSString *filePath =
+    [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    
+    NSURL *url =  [NSURL fileURLWithPath:filePath];
+    UIDocumentMenuViewController *docMenuVC = [[UIDocumentMenuViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
+    
+    //UIDocumentPickerViewController *docPickerVC = [[UIDocumentPickerViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
+    docMenuVC.delegate = self.delegate;
+    //docPickerVC.delegate = self.delegate;
+    
+    //[self.delegate presentViewController:docPickerVC animated:YES completion:nil];
+    [self.delegate presentViewController:docMenuVC animated:YES completion:nil];
+    
+    
+}
 @end

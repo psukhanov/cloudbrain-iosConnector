@@ -8,7 +8,7 @@
 @class LoggingListener;
 @class SessionCell;
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate>
 
 @property (nonatomic) NSMutableArray *sessions;
 @property (nonatomic, weak) IBOutlet UITableView *tblSessions;

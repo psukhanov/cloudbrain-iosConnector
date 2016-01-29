@@ -43,6 +43,7 @@
 		00E84C081C0E1FCA0015E0DC /* amqp_url.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84C0A1C0E239B0015E0DC /* config.h in Sources */ = {isa = PBXBuildFile; fileRef = 00E84C091C0E233D0015E0DC /* config.h */; };
 		00EA836C1C45A1B1001F58D1 /* MSSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EA836B1C45A1B1001F58D1 /* MSSession.m */; };
+		3A9A806C1C5B24260041AA35 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A806B1C5B24260041AA35 /* CloudKit.framework */; };
 		5401E01E1A93DA2600FADC22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E01D1A93DA2600FADC22 /* main.m */; };
 		5401E0211A93DA2600FADC22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0201A93DA2600FADC22 /* AppDelegate.m */; };
 		5401E0241A93DA2600FADC22 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0231A93DA2600FADC22 /* ViewController.m */; };
@@ -128,6 +129,8 @@
 		00E84C091C0E233D0015E0DC /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../build/librabbitmq/config.h; sourceTree = "<group>"; };
 		00EA836A1C45A1B1001F58D1 /* MSSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSession.h; sourceTree = "<group>"; };
 		00EA836B1C45A1B1001F58D1 /* MSSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSession.m; sourceTree = "<group>"; };
+		3A9A806A1C5B24210041AA35 /* MuseStatsIos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = MuseStatsIos.entitlements; path = MuseStatsIos/MuseStatsIos.entitlements; sourceTree = "<group>"; };
+		3A9A806B1C5B24260041AA35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5401E0181A93DA2600FADC22 /* MuseStatsIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseStatsIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5401E01C1A93DA2600FADC22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5401E01D1A93DA2600FADC22 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00CF0E021C1D3E1D009DFF4B /* CoreAudio.framework in Frameworks */,
+				3A9A806C1C5B24260041AA35 /* CloudKit.framework in Frameworks */,
 				E91B78621B03B8A300082B2E /* libMuse.a in Frameworks */,
 				E94FB6F01B03B53400B73B4B /* libc++.dylib in Frameworks */,
 			);
@@ -272,6 +276,8 @@
 		5401E00F1A93DA2600FADC22 = {
 			isa = PBXGroup;
 			children = (
+				3A9A806B1C5B24260041AA35 /* CloudKit.framework */,
+				3A9A806A1C5B24210041AA35 /* MuseStatsIos.entitlements */,
 				00CF0E011C1D3E1D009DFF4B /* CoreAudio.framework */,
 				E91B78631B03B8F500082B2E /* Muse.h */,
 				00B9558C1BFEA657001C2233 /* cloudbrain-iosConnector */,
@@ -395,8 +401,12 @@
 				TargetAttributes = {
 					5401E0171A93DA2600FADC22 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = TJ323AVCSP;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -613,6 +623,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MuseStatsIos/MuseStatsIos.entitlements;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
@@ -641,6 +652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MuseStatsIos/MuseStatsIos.entitlements;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
