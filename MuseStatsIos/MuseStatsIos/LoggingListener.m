@@ -94,7 +94,7 @@
 
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                             [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
-                            //NSLog(@"sent data");
+                            NSLog(@"sent data");
                         });
                     }
                 }
@@ -182,10 +182,12 @@
         for (NSString *filename in filelist)
         {
             NSArray *comps = [filename componentsSeparatedByString:@".muse"];
-            NSString *restOfName = [comps objectAtIndex:0];
-            NSString *sessionNum = [[restOfName componentsSeparatedByString:@"_"] objectAtIndex:1];
-            if ([sessionNum integerValue] > maxSessionNum)
-                maxSessionNum = [sessionNum integerValue];
+            if ([comps count] > 1){
+                NSString *restOfName = [comps objectAtIndex:0];
+                NSString *sessionNum = [[restOfName componentsSeparatedByString:@"_"] objectAtIndex:1];
+                if ([sessionNum integerValue] > maxSessionNum)
+                    maxSessionNum = [sessionNum integerValue];
+            }
         }
         
         NSInteger newSessionNum = maxSessionNum + 1;
