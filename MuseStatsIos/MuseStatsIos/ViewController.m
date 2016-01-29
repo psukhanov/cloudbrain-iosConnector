@@ -108,9 +108,9 @@
         
         [self startTimer];
         
-        if ([self.delegate respondsToSelector:@selector(startSession)])
+        if ([self.delegate respondsToSelector:@selector(startSessionWithName:)])
         {
-            [self.delegate startSession];
+            [self.delegate startSessionWithName:self.txtSessionName.text];
         }
     }
     else {
@@ -255,6 +255,27 @@
     cell.delegate = self;
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    [header setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 310, 20)];
+    [lbl setTextAlignment:NSTextAlignmentCenter];
+    
+    [lbl setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0]];
+    
+    [lbl setText:@"Recorded Sessions"];
+    
+    [header addSubview:lbl];
+    return header;
 }
 
 -(void)deleteSessionForCell:(SessionCell*)cell

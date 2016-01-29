@@ -23,7 +23,7 @@
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet;
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet;
 - (void)receiveMuseConnectionPacket:(IXNMuseConnectionPacket *)packet;
--(void)startSession;
+-(void)startSessionWithName:(NSString*)name;
 -(void)endSession;
 
 @end

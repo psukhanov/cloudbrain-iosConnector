@@ -166,28 +166,35 @@
     return exchangeName;
 }
 
--(void)startSession
+-(void)startSessionWithName:(NSString *)name
 {
+    NSString *filename = name;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    NSArray *filelist= [filemgr directoryContentsAtPath:documentsDirectory];
-    
-    NSInteger maxSessionNum = 0;
-    for (NSString *filename in filelist)
+    // if name not set, set it to session_x, x = 1 greater than largest session number to date
+    if (!name || [name isEqualToString:@""])
     {
-        NSArray *comps = [filename componentsSeparatedByString:@".muse"];
-        NSString *restOfName = [comps objectAtIndex:0];
-        NSString *sessionNum = [[restOfName componentsSeparatedByString:@"_"] objectAtIndex:1];
-        if ([sessionNum integerValue] > maxSessionNum)
-            maxSessionNum = [sessionNum integerValue];
+        NSFileManager *filemgr = [NSFileManager defaultManager];
+        NSArray *filelist= [filemgr directoryContentsAtPath:documentsDirectory];
+        
+        NSInteger maxSessionNum = 0;
+        for (NSString *filename in filelist)
+        {
+            NSArray *comps = [filename componentsSeparatedByString:@".muse"];
+            NSString *restOfName = [comps objectAtIndex:0];
+            NSString *sessionNum = [[restOfName componentsSeparatedByString:@"_"] objectAtIndex:1];
+            if ([sessionNum integerValue] > maxSessionNum)
+                maxSessionNum = [sessionNum integerValue];
+        }
+        
+        NSInteger newSessionNum = maxSessionNum + 1;
+        filename = [NSString stringWithFormat:@"%@%ld%@",kSessionBaseFileName,(long)newSessionNum,@".muse"];
     }
     
-    NSInteger newSessionNum = maxSessionNum + 1;
-    
     NSString *filePath =
-    [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%ld%@",kSessionBaseFileName,(long)newSessionNum,@".muse"]];
+    [documentsDirectory stringByAppendingPathComponent:filename];
+    
     
     self.fileWriter = [IXNMuseFileFactory museFileWriterWithPathString:filePath];
 	[self.fileWriter addAnnotationString:1 annotation:@"fileWriter created"];

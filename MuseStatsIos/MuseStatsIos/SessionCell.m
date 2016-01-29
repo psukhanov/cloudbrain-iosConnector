@@ -7,7 +7,6 @@
 //
 
 #import "SessionCell.h"
-#import <AFNetworking/AFNetworking.h>
 #import "Constants.h"
 #import "Muse.h"
 
