@@ -17,7 +17,7 @@
                BlueprintIdentifier = "5401E0171A93DA2600FADC22"
                BuildableName = "MuseStatsIos.app"
                BlueprintName = "MuseStatsIos"
-               ReferencedContainer = "container:MuseStatsIos.xcodeproj">
+               ReferencedContainer = "container:MuseCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "5401E0301A93DA2600FADC22"
                BuildableName = "MuseStatsIosTests.xctest"
                BlueprintName = "MuseStatsIosTests"
-               ReferencedContainer = "container:MuseStatsIos.xcodeproj">
+               ReferencedContainer = "container:MuseCloud.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "5401E0171A93DA2600FADC22"
             BuildableName = "MuseStatsIos.app"
             BlueprintName = "MuseStatsIos"
-            ReferencedContainer = "container:MuseStatsIos.xcodeproj">
+            ReferencedContainer = "container:MuseCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -68,7 +68,7 @@
             BlueprintIdentifier = "5401E0171A93DA2600FADC22"
             BuildableName = "MuseStatsIos.app"
             BlueprintName = "MuseStatsIos"
-            ReferencedContainer = "container:MuseStatsIos.xcodeproj">
+            ReferencedContainer = "container:MuseCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -87,7 +87,7 @@
             BlueprintIdentifier = "5401E0171A93DA2600FADC22"
             BuildableName = "MuseStatsIos.app"
             BlueprintName = "MuseStatsIos"
-            ReferencedContainer = "container:MuseStatsIos.xcodeproj">
+            ReferencedContainer = "container:MuseCloud.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

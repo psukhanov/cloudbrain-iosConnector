@@ -24,6 +24,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
+    [(UIScrollView*)self.view setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+    
+    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearKeyboard)];
+    [self.view addGestureRecognizer:bgTap];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    self.connectedToMuse = NO;
+}
+
+-(void)clearKeyboard
+{
+    [self.txtSessionName resignFirstResponder];
 }
 
 -(void)loadData
@@ -45,6 +62,10 @@
         NSDictionary *data = [self museFileToData:filePath];
         [self.sessions addObject:data];
     }
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:NO];
+    [self.sessions sortUsingDescriptors:@[sort]];
+    
     [self.tblSessions reloadData];
 
 }
@@ -66,8 +87,18 @@
 -(IBAction)startSession:(id)sender
 {
     if (!self.sessionStarted){
+        
+        if (!self.connectedToMuse){
+            [[[UIAlertView alloc] initWithTitle:@"Not connected" message:@"Please ensure that the Muse device is connected via bluetooth before starting a session" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
+            return;
+        }
+        
         NSLog(@"starting session");
-        [self.btnSession setTitle:@"End Session" forState:UIControlStateNormal];
+        UIColor *offColor = [UIColor colorWithRed:0.8 green:0.4 blue:0.4 alpha:1];
+        
+        NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"End Session" attributes:@{NSForegroundColorAttributeName:offColor}];
+        [self.btnSession setAttributedTitle:title forState:UIControlStateNormal];
+        
         self.sessionStarted = YES;
         self.dateSessionStart = [NSDate date];
         
@@ -85,6 +116,11 @@
     else {
         NSLog(@"ending session");
         [self.btnSession setTitle:@"Start Session" forState:UIControlStateNormal];
+        UIColor *onColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.8 alpha:1];
+
+        NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Start Session" attributes:@{NSForegroundColorAttributeName:onColor}];
+        [self.btnSession setAttributedTitle:title forState:UIControlStateNormal];
+        
         self.sessionStarted = NO;
         [sessionTimer invalidate];
         
@@ -124,11 +160,8 @@
 - (NSDictionary*)museFileToData:(NSString*)fileName{
     NSLog(@"start play muse");
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(
-                                                         NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath =
-    [documentsDirectory stringByAppendingPathComponent:fileName];
+    [self documentFilePathForFilename:fileName];
     
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
@@ -273,6 +306,61 @@
     NSString *filePath =
     [documentsDirectory stringByAppendingPathComponent:filename];
     return filePath;
+}
+
+-(void)setStatusConnected:(BOOL)connected
+{
+    if (connected){
+        [self.lblConnected setText:@"Connected"];
+        [self.imgConnected setImage:[UIImage imageNamed:@"200px-Green-dot.png"]];
+        self.connectedToMuse = YES;
+    }
+    else {
+        [self.lblConnected setText:@"Not Connected"];
+        [self.imgConnected setImage:[UIImage imageNamed:@"250px-Grey-dot.png"]];
+        self.connectedToMuse = NO;
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    CGRect    screenRect;
+    CGRect    windowRect;
+    CGRect    viewRect;
+    
+    // determine's keyboard height
+    screenRect    = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    windowRect    = [self.view.window convertRect:screenRect fromWindow:nil];
+    viewRect      = [self.view        convertRect:windowRect fromView:nil];
+    CGSize kbSize = viewRect.size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+20, 0.0);
+    [(UIScrollView*)self.view setContentInset:contentInsets];
+    [(UIScrollView*)self.view setScrollIndicatorInsets:contentInsets];
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    //UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    [(UIScrollView*)self.view setContentInset:contentInsets];
+    [(UIScrollView*)self.view setScrollIndicatorInsets:contentInsets];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 /*

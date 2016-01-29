@@ -133,10 +133,13 @@
         case IXNConnectionStateDisconnected:
             state = @"disconnected";
             [self.fileWriter addAnnotationString:1 annotation:@"disconnected"];
+            [self.viewController setStatusConnected:NO];
             [self endSession];
             break;
         case IXNConnectionStateConnected:
             state = @"connected";
+            [self.viewController setStatusConnected:YES];
+
             //[self.fileWriter addAnnotationString:1 annotation:@"connected"];
             break;
         case IXNConnectionStateConnecting:
@@ -204,7 +207,7 @@
     {
         if ([self.arrBuffer count] == 0)
         {
-            [self.arrBuffer addObject:@{@"timestamp":@1452473072000,@"channel_0":@1,@"channel_1":@1,@"channel_2":@1,@"channel_3":@1}];
+            //[self.arrBuffer addObject:@{@"timestamp":@1452473072000,@"channel_0":@1,@"channel_1":@1,@"channel_2":@1,@"channel_3":@1}];
         }
         NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
         

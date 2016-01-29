@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005ECA301C52051D0036B5AD /* 200px-Green-dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */; };
+		005ECA311C52051D0036B5AD /* 250px-Grey-dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 005ECA2F1C52051D0036B5AD /* 250px-Grey-dot.png */; };
 		0081E4011C40B611002AEFF4 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0081E4001C40B611002AEFF4 /* SessionCell.m */; };
+		009102431C5AE86300E98504 /* icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 009102411C5AE86300E98504 /* icon_120.png */; };
+		009102441C5AE86300E98504 /* icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 009102421C5AE86300E98504 /* icon_180.png */; };
 		00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B9558F1BFEA657001C2233 /* AMQPChannel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957951BFEA658001C2233 /* AMQPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955911BFEA657001C2233 /* AMQPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00B957961BFEA658001C2233 /* AMQPConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B955931BFEA657001C2233 /* AMQPConsumer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -63,8 +67,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "200px-Green-dot.png"; sourceTree = "<group>"; };
+		005ECA2F1C52051D0036B5AD /* 250px-Grey-dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "250px-Grey-dot.png"; sourceTree = "<group>"; };
 		0081E3FF1C40B611002AEFF4 /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
 		0081E4001C40B611002AEFF4 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
+		009102411C5AE86300E98504 /* icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_120.png; sourceTree = "<group>"; };
+		009102421C5AE86300E98504 /* icon_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_180.png; sourceTree = "<group>"; };
 		00B9558E1BFEA657001C2233 /* AMQPChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPChannel.h; sourceTree = "<group>"; };
 		00B9558F1BFEA657001C2233 /* AMQPChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMQPChannel.m; sourceTree = "<group>"; };
 		00B955901BFEA657001C2233 /* AMQPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMQPConnection.h; sourceTree = "<group>"; };
@@ -166,6 +174,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		005ECA2D1C52051D0036B5AD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				009102411C5AE86300E98504 /* icon_120.png */,
+				009102421C5AE86300E98504 /* icon_180.png */,
+				005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */,
+				005ECA2F1C52051D0036B5AD /* 250px-Grey-dot.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
+		};
 		00B9558C1BFEA657001C2233 /* cloudbrain-iosConnector */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +280,7 @@
 				00CF0E011C1D3E1D009DFF4B /* CoreAudio.framework */,
 				E91B78631B03B8F500082B2E /* Muse.h */,
 				00B9558C1BFEA657001C2233 /* cloudbrain-iosConnector */,
+				005ECA2D1C52051D0036B5AD /* Images */,
 				00B958FF1BFEA9C4001C2233 /* Constants.h */,
 				00B959001BFEA9C4001C2233 /* Constants.m */,
 				00B959021BFEAFB2001C2233 /* RabbitMQClient.h */,
@@ -414,7 +434,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5401E0131A93DA2600FADC22 /* Build configuration list for PBXProject "MuseStatsIos" */;
+			buildConfigurationList = 5401E0131A93DA2600FADC22 /* Build configuration list for PBXProject "MuseCloud" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -439,9 +459,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5401E0271A93DA2600FADC22 /* Main.storyboard in Resources */,
+				009102431C5AE86300E98504 /* icon_120.png in Resources */,
 				5401E02C1A93DA2600FADC22 /* LaunchScreen.xib in Resources */,
 				00B9593E1BFEC845001C2233 /* CMakeLists.txt in Resources */,
 				00B9579C1BFEA658001C2233 /* LICENSE in Resources */,
+				005ECA311C52051D0036B5AD /* 250px-Grey-dot.png in Resources */,
+				009102441C5AE86300E98504 /* icon_180.png in Resources */,
+				005ECA301C52051D0036B5AD /* 200px-Green-dot.png in Resources */,
 				5401E0291A93DA2600FADC22 /* Images.xcassets in Resources */,
 				00B9579D1BFEA658001C2233 /* LICENSE.gpl in Resources */,
 			);
@@ -753,7 +777,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5401E0131A93DA2600FADC22 /* Build configuration list for PBXProject "MuseStatsIos" */ = {
+		5401E0131A93DA2600FADC22 /* Build configuration list for PBXProject "MuseCloud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5401E0391A93DA2600FADC22 /* Debug */,

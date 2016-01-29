@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MuseStatsIos.xcodeproj">
+      location = "group:/Users/a/code/cloudbrain-iosConnector/MuseStatsIos/MuseCloud.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
