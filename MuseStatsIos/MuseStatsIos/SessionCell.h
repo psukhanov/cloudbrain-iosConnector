@@ -23,6 +23,7 @@
 -(void)setUpView;
 -(IBAction)exportSessionData;
 -(IBAction)exportSessionDataAsFile;
+- (IBAction)exportToCloudStorageTapped:(id)sender;
 -(void)deleteSession:(NSDictionary*)session;
 
 @end
