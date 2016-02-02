@@ -278,6 +278,29 @@
     return header;
 }
 
+- (BOOL)tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        //[self.dataArray removeObjectAtIndex:indexPath.row];
+        //[tableView reloadData]; // tell table to refresh now
+        
+        SessionCell *sessionCell = (SessionCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [self deleteSessionForCell:sessionCell];
+        
+    }
+
+}
+
+
 -(void)deleteSessionForCell:(SessionCell*)cell
 {
     NSDictionary *session = cell.sessionData;
