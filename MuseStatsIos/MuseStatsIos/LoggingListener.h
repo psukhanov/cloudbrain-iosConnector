@@ -25,5 +25,6 @@
 - (void)receiveMuseConnectionPacket:(IXNMuseConnectionPacket *)packet;
 -(void)startSessionWithName:(NSString*)name;
 -(void)endSession;
+-(void)logStim:(BOOL)on;
 
 @end

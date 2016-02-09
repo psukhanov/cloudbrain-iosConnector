@@ -4,9 +4,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TuneViewController.h"
 
 @class LoggingListener;
 @class SessionCell;
+@class TuneViewController;
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate>
 
@@ -23,10 +25,13 @@
 @property NSDate *dateSessionStart;
 @property BOOL connectedToMuse;
 
+@property TuneViewController *tuneDelegate;
+
 -(void)loadData;
 -(IBAction)startSession:(id)sender;
 -(void)deleteSessionForCell:(SessionCell*)cell;
 -(void)setStatusConnected:(BOOL)connected;
+-(IBAction)goToTuneView:(id)sender;
 
 @end
 

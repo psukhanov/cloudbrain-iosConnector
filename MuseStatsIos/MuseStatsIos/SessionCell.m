@@ -55,12 +55,15 @@
 
 -(void)exportSessionData
 {
-    NSArray *arr = [self museFileToData];
+    NSString *str = [self museFileToData:@"json"];
+    
     NSString *filename = [self.sessionData objectForKey:@"fileName"];
+    NSError *err;
+
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err];
     
     NSDictionary *data = @{@"data":arr,@"filename":filename};
     
-    NSError *err;
     NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:data options:0 error:&err] encoding:NSUTF8StringEncoding];
     if (err)
     {
@@ -74,7 +77,6 @@
     //[req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [req setHTTPBody:[NSJSONSerialization dataWithJSONObject:data options:0 error:nil]];
 
-    
     [self.btnExport setUserInteractionEnabled:NO];
     self.uploadProgress = 0;
     NSURLConnection *connec = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:YES];
@@ -133,8 +135,11 @@
     NSLog(@"export failed with error:%@",error);
 }
 
-- (NSArray*)museFileToData{
+- (NSString*)museFileToData:(NSString*)format {
     NSLog(@"start play muse");
+    
+    if (!format || [format isEqualToString:@""])
+        format = @"csv";
     
     NSMutableArray *exportData = [[NSMutableArray alloc] init];
     NSMutableString *strFileData = [[NSMutableString alloc] init];
@@ -145,6 +150,8 @@
     NSString *filename = [self.sessionData objectForKey:@"fileName"];
     NSString *filePath =
     [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    BOOL stimOn = NO;
     
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
@@ -165,10 +172,12 @@
                 NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
                 //NSLog(@"timestamp:%@",timestamp);
                 
-                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]};
+                NSNumber *stim = [NSNumber numberWithBool:stimOn];
+                
+                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":stim};
                 
                 [exportData addObject:send];
-                [strFileData appendFormat:@"%@ %@ %@ %@\n",eegData[0],eegData[1],eegData[2],eegData[3]];
+                [strFileData appendFormat:@"%@ %@ %@ %@ %@ %@\n",timestamp,eegData[0],eegData[1],eegData[2],eegData[3],stim];
                 
                 //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
                 break;
@@ -196,6 +205,14 @@
             case IXNMessageTypeAnnotation:
             {
                 IXNAnnotationData *annotation = [fileReader getAnnotation];
+                if ([annotation.data isEqualToString:@"stimOn"])
+                {
+                    stimOn = YES;
+                }
+                else if ([annotation.data isEqualToString:@"stimOff"])
+                {
+                    stimOn = NO;
+                }
                 NSLog(@"annotation = %@", annotation.data);
                 
                 break;
@@ -204,28 +221,40 @@
                 break;
         }
     }
-    return exportData;
+    NSError *error;
+    
+    NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:exportData options:0 error:&error] encoding:NSUTF8StringEncoding];
+    
+    if ([format isEqualToString:@"csv"])
+        return  strFileData;
+    else
+        return json;
 }
 
 
 - (IBAction)exportToCloudStorageTapped:(id)sender {
     
+    NSString *data = [self museFileToData:@"csv"];
+    
+    NSString *filename = [self.sessionData objectForKey:@"fileName"];
+    NSString *tmpFileName = [filename stringByAppendingString:@".csv"];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(
                                                          NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filename = [self.sessionData objectForKey:@"fileName"];
-    NSString *filePath =
-    [documentsDirectory stringByAppendingPathComponent:filename];
+    NSError *error;
     
+    NSString *tmpFilePath = [documentsDirectory stringByAppendingPathComponent:tmpFileName];
+    [data writeToFile:tmpFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     
-    NSURL *url =  [NSURL fileURLWithPath:filePath];
+    //NSString *filePath =
+    //[documentsDirectory stringByAppendingPathComponent:filename];
+    
+    NSURL *url =  [NSURL fileURLWithPath:tmpFilePath];
     UIDocumentMenuViewController *docMenuVC = [[UIDocumentMenuViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
     
-    //UIDocumentPickerViewController *docPickerVC = [[UIDocumentPickerViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
     docMenuVC.delegate = self.delegate;
-    //docPickerVC.delegate = self.delegate;
     
-    //[self.delegate presentViewController:docPickerVC animated:YES completion:nil];
     [self.delegate presentViewController:docMenuVC animated:YES completion:nil];
     
     

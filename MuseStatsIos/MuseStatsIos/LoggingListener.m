@@ -84,11 +84,19 @@
 
                 //NSLog(@"timestamp:%lu",timestamp);
                 
-                [self.arrBuffer addObject:@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3]}];
+                NSNumber *playing = [NSNumber numberWithBool:NO];
+                if (self.viewController.tuneDelegate && self.viewController.tuneDelegate.isPlaying)
+                {
+                    playing = [NSNumber numberWithBool:YES];
+
+                }
+                
+                [self.arrBuffer addObject:@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":playing}];
+                
                 
                 if ([kRecordingMode isEqualToString:@"remote-online"]){
                     
-                    if ([self.arrBuffer count] == 200){
+                    if ([self.arrBuffer count] == 10){
                         NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
                         [self.arrBuffer removeAllObjects];
 
@@ -113,6 +121,15 @@
     }
 }
 
+-(void)logStim:(BOOL)on
+{
+    if (on)
+        [self.fileWriter addAnnotationString:1 annotation:@"stimOn"];
+    else
+        [self.fileWriter addAnnotationString:1 annotation:@"stimOff"];
+
+}
+
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet {
     if (!packet.headbandOn)
         return;
@@ -132,9 +149,11 @@
     switch (packet.currentConnectionState) {
         case IXNConnectionStateDisconnected:
             state = @"disconnected";
-            [self.fileWriter addAnnotationString:1 annotation:@"disconnected"];
-            [self.viewController setStatusConnected:NO];
-            [self endSession];
+            if (_shouldRecordData){
+                [self.fileWriter addAnnotationString:1 annotation:@"disconnected"];
+                [self.viewController setStatusConnected:NO];
+                [self endSession];
+            }
             break;
         case IXNConnectionStateConnected:
             state = @"connected";
@@ -214,10 +233,6 @@
     
     if ([kRecordingMode isEqualToString:@"remote-offline"])
     {
-        if ([self.arrBuffer count] == 0)
-        {
-            //[self.arrBuffer addObject:@{@"timestamp":@1452473072000,@"channel_0":@1,@"channel_1":@1,@"channel_2":@1,@"channel_3":@1}];
-        }
         NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{

@@ -7,6 +7,7 @@
 #import "AppDelegate.h"
 #import "LoggingListener.h"
 #import "SessionCell.h"
+#import "TuneViewController.h"
 
 @interface ViewController ()
 
@@ -65,7 +66,6 @@
     
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:NO];
     [self.sessions sortUsingDescriptors:@[sort]];
-    
     [self.tblSessions reloadData];
 
 }
@@ -384,36 +384,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-/*
-#pragma UIPickerViewDelegate
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 2;
-}
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return 60;
-}
-
--(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-{
-    NSString *unit;
-    if (component == 0)
-    {
-        unit = @"min";
-    }
-    else {
-        unit = @"sec";
-    }
-    
-    NSString *title = [NSString stringWithFormat:@"%02lu",row];
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 50, 15)];
-    [lbl setText:title];
-    return lbl;
-}
-*/
 
 - (void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker
 {
@@ -425,7 +395,15 @@
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url
 {
     
-    
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"tuneSegue"]){
+        TuneViewController *tune = (TuneViewController *)[segue destinationViewController];
+        self.tuneDelegate = tune;
+        tune.logger = self.delegate;
+    }
 }
 
 @end
