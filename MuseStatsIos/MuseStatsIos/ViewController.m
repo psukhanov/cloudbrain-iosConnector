@@ -14,6 +14,8 @@
     NSTimer *sessionTimer;
 }
 
+@property(nonatomic, strong) SessionCell *sessionCell;
+
 @end
 
 
@@ -292,12 +294,29 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         //If your data source is an NSMutableArray, do this
         //[self.dataArray removeObjectAtIndex:indexPath.row];
         //[tableView reloadData]; // tell table to refresh now
+        if (self.sessionCell) {
+            self.sessionCell = nil;
+        }
         
-        SessionCell *sessionCell = (SessionCell*)[tableView cellForRowAtIndexPath:indexPath];
-        [self deleteSessionForCell:sessionCell];
+        self.sessionCell = (SessionCell*)[tableView cellForRowAtIndexPath:indexPath];
+       
+        NSString *message = [NSString stringWithFormat:@"%@ will be permanently deleted. Proceed?",[self.sessionCell.sessionData objectForKey:@"fileName"]];
+        [[[UIAlertView alloc] initWithTitle:@"Are you sure?" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Proceed", nil]show];
         
     }
 
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        if ([self respondsToSelector:@selector(deleteSessionForCell:)])
+        {
+            [self deleteSessionForCell:self.sessionCell];
+            [self.tblSessions reloadData];
+        }
+    }
 }
 
 
