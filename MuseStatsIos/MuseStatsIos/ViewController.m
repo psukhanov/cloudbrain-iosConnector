@@ -60,8 +60,11 @@
     
     for (NSString *filePath in filelist)
     {
-        NSDictionary *data = [self museFileToData:filePath];
-        [self.sessions addObject:data];
+        if ([filePath rangeOfString:@".csv"].location == NSNotFound && [filePath rangeOfString:@".wav"].location == NSNotFound)
+        {
+            NSDictionary *data = [self museFileToData:filePath];
+            [self.sessions addObject:data];
+        }
     }
     
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:NO];
@@ -278,6 +281,11 @@
     return header;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self deleteSessionForCell:(SessionCell*)[self tableView:self.tblSessions cellForRowAtIndexPath:indexPath]];
+}
+
 -(void)deleteSessionForCell:(SessionCell*)cell
 {
     NSDictionary *session = cell.sessionData;
@@ -389,12 +397,16 @@
 {
     documentPicker.delegate = self;
     [self presentViewController:documentPicker animated:YES completion:nil];
-    
 }
 
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url
 {
-    
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@",url] error:&error];
+    if (error)
+    {
+        NSLog(@"file delete error:%@",error);
+    }
 }
 
 

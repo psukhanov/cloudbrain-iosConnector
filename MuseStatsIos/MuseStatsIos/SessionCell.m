@@ -152,6 +152,7 @@
     [documentsDirectory stringByAppendingPathComponent:filename];
     
     BOOL stimOn = NO;
+    [strFileData appendFormat:@"%@ %@ %@ %@ %@ %@\n",@"timestamp",@"channel_1",@"channel_2",@"channel_3",@"channel_4",@"stimulus"];
     
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
@@ -254,9 +255,12 @@
     UIDocumentMenuViewController *docMenuVC = [[UIDocumentMenuViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
     
     docMenuVC.delegate = self.delegate;
-    
     [self.delegate presentViewController:docMenuVC animated:YES completion:nil];
     
+}
+
+-(void)deleteTemporaryFile:(NSString*)filepath
+{
     
 }
 @end

@@ -12,6 +12,7 @@
     dispatch_once_t _connectedOnceToken;
     NSString * const kHostName;
     int const kPortNumber;
+    NSString *currentFilename;
 }
 
 @property (nonatomic) BOOL lastBlink;
@@ -218,6 +219,9 @@
     
     
     self.fileWriter = [IXNMuseFileFactory museFileWriterWithPathString:filePath];
+    
+    currentFilename = filename;
+    
 	[self.fileWriter addAnnotationString:1 annotation:@"fileWriter created"];
     [self.fileWriter flush];
 
@@ -229,8 +233,25 @@
 {
     [self.fileWriter addAnnotationString:1 annotation:@"session ended"];
     [self.fileWriter flush];
+    
     _shouldRecordData = NO;
     
+    if (![self.viewController.txtSessionName.text isEqualToString:@""])
+    {
+        
+        NSError * err = NULL;
+        NSFileManager * fm = [NSFileManager defaultManager];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        BOOL result = [fm moveItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentFilename] toPath:[documentsDirectory stringByAppendingPathComponent:self.viewController.txtSessionName.text] error:&err];
+        if(!result)
+            NSLog(@"Error: %@", err);
+        [self.viewController.txtSessionName setText:@""];
+    }
+    currentFilename = @"";
+    
+    // dump data into RabbitMQ if needed
     if ([kRecordingMode isEqualToString:@"remote-offline"])
     {
         NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
