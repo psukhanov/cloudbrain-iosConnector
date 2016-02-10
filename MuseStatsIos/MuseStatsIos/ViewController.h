@@ -19,6 +19,7 @@
 @property (nonatomic) IBOutlet UILabel *lblMinutes, *lblSeconds, *lblConnected;
 @property (nonatomic) IBOutlet UITextField *txtSessionName;
 @property (nonatomic) IBOutlet UIImageView *imgConnected;
+@property (nonatomic) IBOutlet UIScrollView *scroll;
 
 @property (nonatomic, weak) LoggingListener *delegate;
 @property BOOL sessionStarted;

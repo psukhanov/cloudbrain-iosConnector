@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    [(UIScrollView*)self.view setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+    [self.scroll setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearKeyboard)];
     [self.view addGestureRecognizer:bgTap];
@@ -405,8 +405,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     CGSize kbSize = viewRect.size;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+20, 0.0);
-    [(UIScrollView*)self.view setContentInset:contentInsets];
-    [(UIScrollView*)self.view setScrollIndicatorInsets:contentInsets];
+    [(UIScrollView*)self.scroll setContentInset:contentInsets];
+    [(UIScrollView*)self.scroll setScrollIndicatorInsets:contentInsets];
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
@@ -415,8 +415,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     //UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
 
-    [(UIScrollView*)self.view setContentInset:contentInsets];
-    [(UIScrollView*)self.view setScrollIndicatorInsets:contentInsets];
+    [(UIScrollView*)self.scroll setContentInset:contentInsets];
+    [(UIScrollView*)self.scroll setScrollIndicatorInsets:contentInsets];
     
 }
 
