@@ -158,7 +158,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="BrainLog" id="eHW-8G-f3h"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnSession" destination="lET-Rr-7RL" id="U7g-rS-IiT"/>
                         <outlet property="imgConnected" destination="QJw-8i-LXQ" id="6ia-Lf-7Ny"/>
