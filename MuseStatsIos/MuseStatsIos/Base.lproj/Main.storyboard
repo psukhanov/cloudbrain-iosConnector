@@ -162,9 +162,9 @@
                                                     <constraint firstAttribute="width" constant="20" id="OiZ-52-CAM"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-16-e1R">
-                                                <rect key="frame" x="185" y="466" width="127" height="30"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-16-e1R">
+                                                <rect key="frame" x="179" y="466" width="124" height="30"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <state key="normal" title="Recording Locally"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 Min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzG-Tn-gLk">
@@ -193,7 +193,8 @@
                                             <constraint firstItem="Xtd-hg-RNF" firstAttribute="leading" secondItem="QJw-8i-LXQ" secondAttribute="trailing" constant="8" id="74Q-KZ-QNF"/>
                                             <constraint firstAttribute="bottom" secondItem="Xtd-hg-RNF" secondAttribute="bottom" constant="13" id="7QB-zD-1hi"/>
                                             <constraint firstAttribute="trailing" secondItem="4PS-aD-UCt" secondAttribute="trailing" id="7vt-I7-5LW"/>
-                                            <constraint firstAttribute="trailing" secondItem="G4T-16-e1R" secondAttribute="trailing" constant="8" id="Aao-Pv-hEq"/>
+                                            <constraint firstAttribute="trailing" secondItem="G4T-16-e1R" secondAttribute="trailing" constant="10" id="GKG-ae-tpc"/>
+                                            <constraint firstAttribute="bottom" secondItem="G4T-16-e1R" secondAttribute="bottom" constant="8" id="Gfs-BS-7kC"/>
                                             <constraint firstItem="ghr-pt-vZV" firstAttribute="leading" secondItem="A04-AC-zcM" secondAttribute="leading" id="MIp-FV-O2F"/>
                                             <constraint firstItem="lET-Rr-7RL" firstAttribute="top" secondItem="35K-5O-ed4" secondAttribute="bottom" constant="7" id="Mjq-uJ-Hnc"/>
                                             <constraint firstItem="35K-5O-ed4" firstAttribute="top" secondItem="ghr-pt-vZV" secondAttribute="bottom" constant="25" id="TvH-uR-AnA"/>
@@ -201,7 +202,6 @@
                                             <constraint firstItem="35K-5O-ed4" firstAttribute="leading" secondItem="A04-AC-zcM" secondAttribute="leading" constant="90" id="UA9-fj-baE"/>
                                             <constraint firstAttribute="trailing" secondItem="35K-5O-ed4" secondAttribute="trailing" constant="90" id="URj-DJ-vZV"/>
                                             <constraint firstAttribute="trailing" secondItem="K3h-Go-htv" secondAttribute="trailing" constant="45" id="XhM-dX-cKG"/>
-                                            <constraint firstAttribute="bottom" secondItem="G4T-16-e1R" secondAttribute="bottom" constant="8" id="d5s-Ro-ppf"/>
                                             <constraint firstItem="K3h-Go-htv" firstAttribute="top" secondItem="lET-Rr-7RL" secondAttribute="bottom" constant="8" id="h6y-jL-pWl"/>
                                             <constraint firstAttribute="bottom" secondItem="QJw-8i-LXQ" secondAttribute="bottom" constant="13" id="j6x-TH-0Md"/>
                                             <constraint firstItem="lET-Rr-7RL" firstAttribute="centerX" secondItem="A04-AC-zcM" secondAttribute="centerX" id="jLs-Yh-yqw"/>
