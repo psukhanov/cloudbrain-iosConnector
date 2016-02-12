@@ -91,10 +91,10 @@
 {
     if (!self.sessionStarted){
         
-        if (!self.connectedToMuse){
+        /*if (!self.connectedToMuse){
             [[[UIAlertView alloc] initWithTitle:@"Not connected" message:@"Please ensure that the Muse device is connected via bluetooth before starting a session" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
             return;
-        }
+        }*/
         
         NSLog(@"starting session");
         UIColor *offColor = [UIColor colorWithRed:0.8 green:0.4 blue:0.4 alpha:1];
