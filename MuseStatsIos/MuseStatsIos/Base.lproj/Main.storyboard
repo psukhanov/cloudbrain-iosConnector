@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="9wX-hd-LTE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="9wX-hd-LTE">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -36,7 +36,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PcE-xy-3PG" id="iZi-0c-Etk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="745-Df-jXi">
@@ -185,6 +185,12 @@
                                                 <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z2-sz-bUd">
+                                                <rect key="frame" x="48" y="450" width="172" height="21"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -202,8 +208,10 @@
                                             <constraint firstItem="35K-5O-ed4" firstAttribute="leading" secondItem="A04-AC-zcM" secondAttribute="leading" constant="90" id="UA9-fj-baE"/>
                                             <constraint firstAttribute="trailing" secondItem="35K-5O-ed4" secondAttribute="trailing" constant="90" id="URj-DJ-vZV"/>
                                             <constraint firstAttribute="trailing" secondItem="K3h-Go-htv" secondAttribute="trailing" constant="45" id="XhM-dX-cKG"/>
+                                            <constraint firstItem="Xtd-hg-RNF" firstAttribute="top" secondItem="8Z2-sz-bUd" secondAttribute="bottom" constant="-1" id="geM-Tc-41z"/>
                                             <constraint firstItem="K3h-Go-htv" firstAttribute="top" secondItem="lET-Rr-7RL" secondAttribute="bottom" constant="8" id="h6y-jL-pWl"/>
                                             <constraint firstAttribute="bottom" secondItem="QJw-8i-LXQ" secondAttribute="bottom" constant="13" id="j6x-TH-0Md"/>
+                                            <constraint firstItem="8Z2-sz-bUd" firstAttribute="leading" secondItem="A04-AC-zcM" secondAttribute="leading" constant="48" id="jJI-jM-oTK"/>
                                             <constraint firstItem="lET-Rr-7RL" firstAttribute="centerX" secondItem="A04-AC-zcM" secondAttribute="centerX" id="jLs-Yh-yqw"/>
                                             <constraint firstItem="gzG-Tn-gLk" firstAttribute="top" secondItem="lET-Rr-7RL" secondAttribute="bottom" constant="8" id="mEE-8d-may"/>
                                             <constraint firstItem="ghr-pt-vZV" firstAttribute="top" secondItem="4PS-aD-UCt" secondAttribute="bottom" constant="1" id="og6-p5-WCi"/>
@@ -234,6 +242,7 @@
                     <navigationItem key="navigationItem" title="BrainLog" id="eHW-8G-f3h"/>
                     <connections>
                         <outlet property="btnSession" destination="lET-Rr-7RL" id="U7g-rS-IiT"/>
+                        <outlet property="headBandOnStatus" destination="8Z2-sz-bUd" id="ncF-7e-eqt"/>
                         <outlet property="imgConnected" destination="QJw-8i-LXQ" id="6ia-Lf-7Ny"/>
                         <outlet property="lblConnected" destination="Xtd-hg-RNF" id="w4g-53-xJY"/>
                         <outlet property="lblMinutes" destination="gzG-Tn-gLk" id="kYW-20-pf1"/>

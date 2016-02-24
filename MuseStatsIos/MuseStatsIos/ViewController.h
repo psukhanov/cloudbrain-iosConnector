@@ -20,6 +20,7 @@
 @property (nonatomic) IBOutlet UITextField *txtSessionName;
 @property (nonatomic) IBOutlet UIImageView *imgConnected;
 @property (nonatomic) IBOutlet UIScrollView *scroll;
+@property (weak, nonatomic) IBOutlet UILabel *headBandOnStatus;
 
 @property (nonatomic, weak) LoggingListener *delegate;
 @property BOOL sessionStarted;
@@ -32,6 +33,7 @@
 -(IBAction)startSession:(id)sender;
 -(void)deleteSessionForCell:(SessionCell*)cell;
 -(void)setStatusConnected:(BOOL)connected;
+-(void)setHeadbandOnStatus:(BOOL)onStatus;
 -(IBAction)goToTuneView:(id)sender;
 
 @end
