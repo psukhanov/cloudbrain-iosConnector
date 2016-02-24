@@ -17,6 +17,7 @@
 
 @property (nonatomic) BOOL lastBlink;
 @property (nonatomic) BOOL sawOneBlink;
+@property(nonatomic)BOOL currentlyHeadBandOn;
 @property (nonatomic, weak) AppDelegate* delegate;
 @property (nonatomic) id<IXNMuseFileWriter> fileWriter;
 
@@ -169,8 +170,20 @@
 }
 
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet {
-    if (!packet.headbandOn)
-        return;
+ 
+    if (!self.currentlyHeadBandOn) {
+        if (packet.headbandOn) {
+            self.currentlyHeadBandOn = YES;
+        }
+    }
+    if (self.currentlyHeadBandOn) {
+        if (!packet.headbandOn) {
+            self.currentlyHeadBandOn = NO;
+        }
+    }
+    [self.viewController setHeadbandOnStatus:self.currentlyHeadBandOn];
+    //if (!packet.headbandOn)
+    //    return;
     if (!self.sawOneBlink) {
         self.sawOneBlink = YES;
         self.lastBlink = !packet.blink;
