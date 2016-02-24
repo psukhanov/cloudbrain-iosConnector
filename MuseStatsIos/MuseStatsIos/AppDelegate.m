@@ -86,7 +86,8 @@
                                type:IXNMuseDataPacketTypeAccelerometer];
     //[self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeAlphaAbsolute];
     [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeEeg];
-    
+    [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeHorseshoe];
+
     [self.muse registerConnectionListener:self.loggingListener];
     [self.muse runAsynchronously];
 }

@@ -25,6 +25,8 @@
 @property BOOL sessionStarted;
 @property NSDate *dateSessionStart;
 @property BOOL connectedToMuse;
+@property IBOutletCollection(UIImageView) NSArray *horseshoeIndicators;
+@property NSArray *horseshoe;
 
 @property TuneViewController *tuneDelegate;
 

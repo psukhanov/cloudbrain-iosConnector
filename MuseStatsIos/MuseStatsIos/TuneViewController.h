@@ -12,16 +12,18 @@
 
 @interface TuneViewController : UIViewController <AVAudioPlayerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIStepper *stepper;
-@property (nonatomic, strong) IBOutlet UILabel *lblTitle;
+@property (nonatomic, strong) IBOutlet UIStepper *stepperPitch, *stepperNReplays;
+@property (nonatomic, strong) IBOutlet UILabel *lblTitle, *lblNReplays;
 @property (nonatomic) NSMutableArray *arrData;
 
 @property (nonatomic, strong) AVAudioPlayer *player;
-@property NSArray *soundFiles; 
-@property NSInteger selectedSound;
-@property BOOL isPlaying;
-@property LoggingListener *logger;
-
+@property (nonatomic) NSArray *soundFiles;
+@property (nonatomic) NSInteger selectedSound, nReplays;
+@property (nonatomic) BOOL isPlaying;
+@property (nonatomic) LoggingListener *logger;
+@property (nonatomic) NSDate *soundLoopEnd;
+@property (nonatomic) NSTimer *loopTimer;
+@property NSInteger playLength;
 
 -(IBAction)playSound;
 

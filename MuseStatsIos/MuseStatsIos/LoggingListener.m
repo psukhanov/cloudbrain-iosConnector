@@ -63,6 +63,37 @@
 
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet {
     
+    
+    if (packet.packetType == IXNMuseDataPacketTypeHorseshoe){
+        for (NSInteger i=0;i<packet.values.count;i++)
+        {
+            NSInteger value = [packet.values[i] integerValue];
+            NSInteger prevValue = [self.viewController.horseshoe[i] integerValue];
+            
+            UIImageView *indicator = self.viewController.horseshoeIndicators[i];
+            
+            if (prevValue != value){
+                
+                if (value >= 3)
+                {
+                    //bad
+                    [indicator setImage:[UIImage imageNamed:@"200px-Red-dot.png"]];
+                }
+                else if (value == 2)
+                {
+                    //OK
+                    [indicator setImage:[UIImage imageNamed:@"200px-Yellow-dot.png"]];
+                    
+                }
+                else if (value == 1)
+                {
+                    // good
+                    [indicator setImage:[UIImage imageNamed:@"200px-Green-dot.png"]];
+                    
+                }
+            }
+        }
+    }
     if (_shouldRecordData)
     {
         switch (packet.packetType) {
@@ -70,20 +101,19 @@
                 NSLog(@"battery packet received");
                 NSLog([NSString stringWithFormat:@"%f",[packet.values[IXNBatteryChargePercentageRemaining] doubleValue]]);
                 
-                [self.fileWriter addDataPacket:1 packet:packet];
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeBattery packet:packet];
                 break;
             case IXNMuseDataPacketTypeAccelerometer:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeAccelerometer packet:packet];
                 break;
+            }
             case IXNMuseDataPacketTypeEeg:
             {
                 [self.fileWriter addDataPacket:IXNMuseDataPacketTypeEeg packet:packet];
 
                 NSArray *eegData = packet.values;
-                //NSLog(@"data:%@",data);
-                
                 NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
-
-                //NSLog(@"timestamp:%lu",timestamp);
                 
                 NSNumber *playing = [NSNumber numberWithBool:NO];
                 if (self.viewController.tuneDelegate && self.viewController.tuneDelegate.isPlaying)
@@ -94,20 +124,24 @@
                 
                 [self.arrBuffer addObject:@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":playing}];
                 
-                
                 if ([kRecordingMode isEqualToString:@"remote-online"]){
                     
+                    // send RabbitMQ message in 10-sample buffers
                     if ([self.arrBuffer count] == 10){
                         NSString *payload = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self.arrBuffer options:0 error:nil] encoding:NSUTF8StringEncoding];
                         [self.arrBuffer removeAllObjects];
 
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                             [_rmqclient sendData:payload OnExchangeName:[self exchangeName]];
-                            NSLog(@"sent data");
+                            //NSLog(@"sent data");
                         });
                     }
                 }
                 
+                break;
+            }
+            case IXNMuseDataPacketTypeHorseshoe:
+            {
                 break;
             }
             case IXNMuseDataPacketTypeAlphaAbsolute:
@@ -125,7 +159,10 @@
 -(void)logStim:(BOOL)on
 {
     if (on)
+    {
+        //NSString *annotation = [NSString stringWithFormat:@"stimOn:%f",freq];
         [self.fileWriter addAnnotationString:1 annotation:@"stimOn"];
+    }
     else
         [self.fileWriter addAnnotationString:1 annotation:@"stimOff"];
 
@@ -139,8 +176,10 @@
         self.lastBlink = !packet.blink;
     }
     if (self.lastBlink != packet.blink) {
-        if (packet.blink)
+        if (packet.blink){
             NSLog(@"blink");
+            [self.fileWriter addAnnotationString:1 annotation:@"blink"];
+        }
         self.lastBlink = packet.blink;
     }
 }
@@ -152,9 +191,10 @@
             state = @"disconnected";
             if (_shouldRecordData){
                 [self.fileWriter addAnnotationString:1 annotation:@"disconnected"];
-                [self.viewController setStatusConnected:NO];
                 [self endSession];
             }
+            [self.viewController setStatusConnected:NO];
+
             break;
         case IXNConnectionStateConnected:
             state = @"connected";
@@ -238,7 +278,6 @@
     
     if (![self.viewController.txtSessionName.text isEqualToString:@""])
     {
-        
         NSError * err = NULL;
         NSFileManager * fm = [NSFileManager defaultManager];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

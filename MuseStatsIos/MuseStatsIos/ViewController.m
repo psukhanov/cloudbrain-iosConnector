@@ -37,6 +37,24 @@
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
     self.connectedToMuse = NO;
+    self.horseshoe = @[@4,@4,@4,@4];
+    
+    }
+
+-(void)configureBottomToolbar
+{
+    /*self.navigationController.toolbarHidden = NO;
+     
+     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+     [btn setImage:[UIImage imageNamed:@"250px-Grey-dot.png"] forState:UIControlStateNormal];
+     UIImageView *dot = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"40px-Grey-dot.png"]];
+     [dot setFrame:CGRectMake(0, 0, 20, 20)];
+     
+     UIBarButtonItem *connectedIcon = [[UIBarButtonItem alloc] initWithCustomView:dot];
+     
+     NSArray *barButtonItems = @[connectedIcon];
+     
+     [self.navigationController setToolbarItems:barButtonItems animated:YES];*/
 }
 
 -(void)clearKeyboard
@@ -161,7 +179,7 @@
 }
 
 - (NSDictionary*)museFileToData:(NSString*)fileName{
-    NSLog(@"start play muse");
+    //NSLog(@"start play muse");
     
     NSString *filePath =
     [self documentFilePathForFilename:fileName];
@@ -201,19 +219,19 @@
             case IXNMessageTypeVersion:
             {
                 IXNMuseVersion* version = [fileReader getVersion];
-                NSLog(@"version = %@", version.firmwareVersion);
+                //NSLog(@"version = %@", version.firmwareVersion);
                 break;
             }
             case IXNMessageTypeConfiguration:
             {
                 IXNMuseConfiguration* config = [fileReader getConfiguration];
-                NSLog(@"configuration = %@", config.bluetoothMac);
+                //NSLog(@"configuration = %@", config.bluetoothMac);
                 break;
             }
             case IXNMessageTypeAnnotation:
             {
                 IXNAnnotationData *annotation = [fileReader getAnnotation];
-                NSLog(@"annotation = %@", annotation.data);
+                //NSLog(@"annotation = %@", annotation.data);
                 
                 break;
             }
@@ -376,11 +394,19 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     if (connected){
         [self.lblConnected setText:@"Connected"];
         [self.imgConnected setImage:[UIImage imageNamed:@"200px-Green-dot.png"]];
+        for (UIImageView *indicator in self.horseshoeIndicators)
+        {
+            [indicator setImage:[UIImage imageNamed:@"200px-Red-dot.png"]];
+        }
         self.connectedToMuse = YES;
     }
     else {
         [self.lblConnected setText:@"Not Connected"];
         [self.imgConnected setImage:[UIImage imageNamed:@"250px-Grey-dot.png"]];
+        for (UIImageView *indicator in self.horseshoeIndicators)
+        {
+            [indicator setImage:[UIImage imageNamed:@"250px-Grey-dot.png"]];
+        }
         self.connectedToMuse = NO;
     }
 }
@@ -435,12 +461,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url
 {
-    NSError *error;
+    /*NSError *error;
     [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@",url] error:&error];
     if (error)
     {
         NSLog(@"file delete error:%@",error);
-    }
+    }*/
 }
 
 

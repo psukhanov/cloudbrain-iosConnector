@@ -19,8 +19,8 @@ int const kPortNumber = 5672;
 NSString *const kExchangeUsername = @"cloudbrain";
 NSString *const kExchangePassword = @"cloudbrain";
 NSString *const kSessionBaseFileName = @"session_";
-NSString *const kRecordingMode = @"remote-online";
+//NSString *const kRecordingMode = @"remote-online";
 
-//NSString *const kRecordingMode = @"local";
+NSString *const kRecordingMode = @"local";
 
 @end
