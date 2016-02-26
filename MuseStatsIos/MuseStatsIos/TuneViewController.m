@@ -19,7 +19,7 @@
     
     self.arrData = [NSMutableArray array];
     
-    self.soundFiles = @[@"c2_65.41",@"c#2_69.3",@"d2_73.42",@"d#2_77.78",@"e2_82.41",@"f2_87.31",@"f#2_92.5",@"g2_98.00",@"g#2_103.83",@"a2_110.00",@"a#2_116.54",@"b2_123.47"];
+    self.soundFiles = @[@"c2_65.41",@"c#2_69.3",@"d2_73.42",@"d#2_77.78",@"e2_82.41",@"f2_87.31",@"f#2_92.5",@"g2_98.00",@"g#2_103.83",@"a2_110.00",@"a#2_116.54",@"b2_123.47",@"a4_440"];
     
     self.selectedSound = 0;
     
@@ -83,6 +83,8 @@
     self.isPlaying = NO;
     if (self.logger)
         [self.logger logStim:NO];
+    self.stepperNReplays.value -= 1;
+    [self.lblNReplays setText:[NSString stringWithFormat:@"%lu replays",(NSInteger)self.stepperNReplays.value]];
 }
 
 -(void)setReplays:(UIStepper*)stepper
@@ -117,8 +119,7 @@
 -(IBAction)playSelection
 {
     NSInteger repeatInterval = self.playLength * 2;
-    NSInteger totalPlayTime = repeatInterval * self.nReplays;
-
+    NSInteger totalPlayTime = repeatInterval * (self.nReplays-1);
 
     self.loopTimer = [NSTimer timerWithTimeInterval:repeatInterval target:self selector:@selector(playLoopedSound) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.loopTimer forMode:NSDefaultRunLoopMode];
@@ -128,6 +129,7 @@
     
     NSDate *soundLoopStart = [NSDate date];
     self.soundLoopEnd = [soundLoopStart dateByAddingTimeInterval:totalPlayTime];
+    //self.player.numberOfLoops = 1;
     [self playSound];
 
 }
@@ -151,14 +153,14 @@
 {
     if ([[NSDate date] compare:self.soundLoopEnd] == NSOrderedAscending)
     {
-        self.stepperNReplays.value -= 1;
-        [self.lblNReplays setText:[NSString stringWithFormat:@"%lu replays",(NSInteger)self.stepperNReplays.value]];
         [self playSound];
     }
     else {
         [self.logger endSession];
         [self.loopTimer invalidate];
         self.loopTimer = nil;
+        [[[UIAlertView alloc] initWithTitle:@"Recording Complete" message:@"Your brain + audio data has been recorded successfully" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
+        [self performSegueWithIdentifier:@"unwindSegue" sender:self];
     }
 }
 

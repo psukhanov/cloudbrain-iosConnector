@@ -9,6 +9,7 @@
 #import "SessionCell.h"
 #import "Constants.h"
 #import "Muse.h"
+#import "ViewController.h"
 
 @implementation SessionCell
 
@@ -126,6 +127,7 @@
 {
     
 }
+
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [[[UIAlertView alloc] initWithTitle:@"Export Failed" message:[NSString stringWithFormat:@"Export failed due to error: %@",error.description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]show];
@@ -158,7 +160,7 @@
     float accel_z = 0;
     
     
-    [strFileData appendFormat:@"%@ %@ %@ %@ %@ %@\n",@"timestamp",@"channel_1",@"channel_2",@"channel_3",@"channel_4",@"stimulus", @"blink",@"accel_x",@"accel_y",@"accel_z"];
+    [strFileData appendFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@\n",@"timestamp",@"channel_1",@"channel_2",@"channel_3",@"channel_4",@"stimulus", @"blink",@"accel_x",@"accel_y",@"accel_z"];
     
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
@@ -210,13 +212,13 @@
             case IXNMessageTypeVersion:
             {
                 IXNMuseVersion* version = [fileReader getVersion];
-                NSLog(@"version = %@", version.firmwareVersion);
+                //NSLog(@"version = %@", version.firmwareVersion);
                 break;
             }
             case IXNMessageTypeConfiguration:
             {
                 IXNMuseConfiguration* config = [fileReader getConfiguration];
-                NSLog(@"configuration = %@", config.bluetoothMac);
+                //NSLog(@"configuration = %@", config.bluetoothMac);
                 break;
             }
             case IXNMessageTypeAnnotation:
@@ -225,18 +227,18 @@
                 if ([annotation.data isEqualToString:@"stimOn"])
                 {
                     stimOn = YES;
-                    NSLog(@"stimOn");
+                    //NSLog(@"stimOn");
                 }
                 else if ([annotation.data isEqualToString:@"stimOff"])
                 {
                     stimOn = NO;
-                    NSLog(@"stimOff");
+                    //NSLog(@"stimOff");
                 }
                 else if ([annotation.data isEqualToString:@"blink"])
                 {
                     blinkOn = YES;
                 }
-                NSLog(@"annotation = %@", annotation.data);
+                //NSLog(@"annotation = %@", annotation.data);
                 
                 break;
             }
@@ -275,6 +277,7 @@
     
     NSURL *url =  [NSURL fileURLWithPath:tmpFilePath];
     UIDocumentMenuViewController *docMenuVC = [[UIDocumentMenuViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];
+
     
     docMenuVC.delegate = self.delegate;
     [self.delegate presentViewController:docMenuVC animated:YES completion:nil];

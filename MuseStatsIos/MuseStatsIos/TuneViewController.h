@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) IBOutlet UIStepper *stepperPitch, *stepperNReplays;
 @property (nonatomic, strong) IBOutlet UILabel *lblTitle, *lblNReplays;
+@property (nonatomic, strong) IBOutlet UIStoryboardSegue *unwindSegue;
 @property (nonatomic) NSMutableArray *arrData;
 
 @property (nonatomic, strong) AVAudioPlayer *player;

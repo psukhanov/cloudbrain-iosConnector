@@ -36,7 +36,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PcE-xy-3PG" id="iZi-0c-Etk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="745-Df-jXi">
@@ -305,7 +305,7 @@
                                 <rect key="frame" x="40" y="36" width="240" height="95"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLb-YS-hez">
-                                        <rect key="frame" x="23" y="37" width="194" height="21"/>
+                                        <rect key="frame" x="23" y="34" width="194" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -373,9 +373,11 @@
                         <outlet property="lblTitle" destination="LLb-YS-hez" id="sz9-Oi-aL9"/>
                         <outlet property="stepperNReplays" destination="gyG-5L-22I" id="A09-cm-lzv"/>
                         <outlet property="stepperPitch" destination="t1z-bH-WMS" id="1LT-29-dE6"/>
+                        <segue destination="a4K-64-EsD" kind="unwind" identifier="unwindSegue" unwindAction="unwindSegue:" id="Den-aA-zqU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccS-IL-aYK" sceneMemberID="firstResponder"/>
+                <exit id="a4K-64-EsD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="418" y="191"/>
         </scene>

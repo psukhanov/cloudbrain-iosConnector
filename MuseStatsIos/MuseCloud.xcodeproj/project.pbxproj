@@ -15,6 +15,7 @@
 		009102441C5AE86300E98504 /* icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 009102421C5AE86300E98504 /* icon_180.png */; };
 		009102471C5D633D00E98504 /* TuneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009102461C5D633D00E98504 /* TuneViewController.m */; };
 		00A391451C7C4C5300A6A3F5 /* 40px-Grey-dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00A391441C7C4C5200A6A3F5 /* 40px-Grey-dot@2x.png */; };
+		00A391471C7EB31200A6A3F5 /* a4_440.wav in Resources */ = {isa = PBXBuildFile; fileRef = 00A391461C7EB31200A6A3F5 /* a4_440.wav */; };
 		00B82E561C7820C500900ED8 /* a#2_116.54.wav in Resources */ = {isa = PBXBuildFile; fileRef = 00B82E4A1C7820C500900ED8 /* a#2_116.54.wav */; };
 		00B82E571C7820C500900ED8 /* a2_110.00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 00B82E4B1C7820C500900ED8 /* a2_110.00.wav */; };
 		00B82E581C7820C500900ED8 /* b2_123.47.wav in Resources */ = {isa = PBXBuildFile; fileRef = 00B82E4C1C7820C500900ED8 /* b2_123.47.wav */; };
@@ -96,6 +97,7 @@
 		009102451C5D633D00E98504 /* TuneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuneViewController.h; sourceTree = "<group>"; };
 		009102461C5D633D00E98504 /* TuneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuneViewController.m; sourceTree = "<group>"; };
 		00A391441C7C4C5200A6A3F5 /* 40px-Grey-dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40px-Grey-dot@2x.png"; sourceTree = "<group>"; };
+		00A391461C7EB31200A6A3F5 /* a4_440.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = a4_440.wav; sourceTree = "<group>"; };
 		00B82E4A1C7820C500900ED8 /* a#2_116.54.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "a#2_116.54.wav"; sourceTree = "<group>"; };
 		00B82E4B1C7820C500900ED8 /* a2_110.00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = a2_110.00.wav; sourceTree = "<group>"; };
 		00B82E4C1C7820C500900ED8 /* b2_123.47.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = b2_123.47.wav; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		00B82E491C7820C500900ED8 /* soundFiles */ = {
 			isa = PBXGroup;
 			children = (
+				00A391461C7EB31200A6A3F5 /* a4_440.wav */,
 				00B82E4A1C7820C500900ED8 /* a#2_116.54.wav */,
 				00B82E4B1C7820C500900ED8 /* a2_110.00.wav */,
 				00B82E4C1C7820C500900ED8 /* b2_123.47.wav */,
@@ -525,6 +528,7 @@
 				009102441C5AE86300E98504 /* icon_180.png in Resources */,
 				005ECA301C52051D0036B5AD /* 200px-Green-dot.png in Resources */,
 				00B82E5D1C7820C500900ED8 /* e2_82.41.wav in Resources */,
+				00A391471C7EB31200A6A3F5 /* a4_440.wav in Resources */,
 				5401E0291A93DA2600FADC22 /* Images.xcassets in Resources */,
 				00B82EA91C7C3D9E00900ED8 /* Icon_320_240@2x.png in Resources */,
 				00B82E5F1C7820C500900ED8 /* f2_87.31.wav in Resources */,

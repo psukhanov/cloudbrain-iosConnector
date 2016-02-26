@@ -35,6 +35,7 @@
 -(void)deleteSessionForCell:(SessionCell*)cell;
 -(void)setStatusConnected:(BOOL)connected;
 -(IBAction)goToTuneView:(id)sender;
+-(IBAction)unwindSegue:(UIStoryboardSegue*)segue;
 
 @end
 

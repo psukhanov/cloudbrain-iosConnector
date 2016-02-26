@@ -39,7 +39,8 @@
     self.connectedToMuse = NO;
     self.horseshoe = @[@4,@4,@4,@4];
     
-    }
+    [[UINavigationBar appearance] setTranslucent:NO];
+}
 
 -(void)configureBottomToolbar
 {
@@ -74,16 +75,30 @@
     AppDelegate *app = [UIApplication sharedApplication].delegate;
     app.nSessions = [NSNumber numberWithLong:[filelist count]];
     
-    self.sessions = [NSMutableArray array];
+    NSArray *sessions = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessions"];
+    NSArray *savedFileNames;
+    if (!sessions){
+        self.sessions = [NSMutableArray array];
+        savedFileNames = [NSArray array];
+    }
+    else {
+        savedFileNames = [sessions valueForKeyPath:@"fileName"];
+        self.sessions = [sessions mutableCopy];
+    }
     
+    // check for newly added files
     for (NSString *filePath in filelist)
     {
         if ([filePath rangeOfString:@".csv"].location == NSNotFound && [filePath rangeOfString:@".wav"].location == NSNotFound)
         {
-            NSDictionary *data = [self museFileToData:filePath];
-            [self.sessions addObject:data];
+            if (![savedFileNames containsObject:filePath]){
+                NSDictionary *data = [self museFileToData:filePath];
+                [self.sessions addObject:data];
+            }
         }
     }
+    [[NSUserDefaults standardUserDefaults] setObject:self.sessions forKey:@"sessions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"endDate" ascending:NO];
     [self.sessions sortUsingDescriptors:@[sort]];
@@ -187,6 +202,7 @@
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
 
+    
     int64_t firstTimestamp = 0;
     int64_t lastTimestamp = 0;
     
@@ -456,6 +472,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker
 {
     documentPicker.delegate = self;
+    //[documentPicker.view setFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+    
     [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
@@ -478,4 +496,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
+-(IBAction)unwindSegue:(UIStoryboardSegue*)segue
+{
+    
+}
 @end
