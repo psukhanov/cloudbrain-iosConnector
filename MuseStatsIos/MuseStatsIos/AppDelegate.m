@@ -30,6 +30,7 @@
         // Muse connected to the device. Do this by delaying the picker by 1
         // second. If startWithMuse happens before the timer expires, cancel
         // the timer.
+        
         self.musePickerTimer =
             [NSTimer scheduledTimerWithTimeInterval:1
                                              target:self
@@ -47,6 +48,7 @@
                       options:(NSKeyValueObservingOptionNew |
                                NSKeyValueObservingOptionInitial)
                       context:nil];
+    
 }
 
 - (void)showPicker {
@@ -84,7 +86,6 @@
                                type:IXNMuseDataPacketTypeBattery];
     [self.muse registerDataListener:self.loggingListener
                                type:IXNMuseDataPacketTypeAccelerometer];
-    //[self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeAlphaAbsolute];
     [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeEeg];
     [self.muse registerDataListener:self.loggingListener type:IXNMuseDataPacketTypeHorseshoe];
 
@@ -114,6 +115,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    self.recordingOptions = @[@"location",@"EEG",@"blink",@"acceleration"];
+    
+    if ([self.recordingOptions containsObject:@"location"]){
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+    
+        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+    
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        self.locationManager.distanceFilter = 50;
+        [self.locationManager startUpdatingLocation];
+    }
+    
     return YES;
 }
 
@@ -137,6 +154,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     self.muse = nil;
+}
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    
 }
 
 @end

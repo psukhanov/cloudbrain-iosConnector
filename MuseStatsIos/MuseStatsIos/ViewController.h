@@ -10,7 +10,7 @@
 @class SessionCell;
 @class TuneViewController;
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate>
 
 @property (nonatomic) NSMutableArray *sessions;
 @property (nonatomic, weak) IBOutlet UITableView *tblSessions;
@@ -35,8 +35,8 @@
 -(IBAction)startSession:(id)sender;
 -(void)deleteSessionForCell:(SessionCell*)cell;
 -(void)setStatusConnected:(BOOL)connected;
--(void)setHeadbandOnStatus:(BOOL)onStatus;
--(IBAction)goToTuneView:(id)sender;
+-(IBAction)unwindSegue:(UIStoryboardSegue*)segue;
+
 
 @end
 
