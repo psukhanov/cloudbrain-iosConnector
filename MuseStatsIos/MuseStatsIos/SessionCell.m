@@ -203,24 +203,6 @@
 
                 break;
             }
-            case IXNMessageTypeBattery:
-            {
-                IXNMuseDataPacket* packet = [fileReader getDataPacket];
-                //NSLog(@"data packet = %d", (int)packet.packetType);
-                break;
-            }
-            case IXNMessageTypeVersion:
-            {
-                IXNMuseVersion* version = [fileReader getVersion];
-                //NSLog(@"version = %@", version.firmwareVersion);
-                break;
-            }
-            case IXNMessageTypeConfiguration:
-            {
-                IXNMuseConfiguration* config = [fileReader getConfiguration];
-                //NSLog(@"configuration = %@", config.bluetoothMac);
-                break;
-            }
             case IXNMessageTypeAnnotation:
             {
                 IXNAnnotationData *annotation = [fileReader getAnnotation];
@@ -256,6 +238,92 @@
         return json;
 }
 
+- (NSArray*)museFileToArray{
+    
+    NSMutableArray *exportData = [[NSMutableArray alloc] init];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(
+                                                         NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filename = [self.sessionData objectForKey:@"fileName"];
+    NSString *filePath =
+    [documentsDirectory stringByAppendingPathComponent:filename];
+    
+    BOOL stimOn = NO;
+    BOOL blinkOn = NO;
+    float accel_x = 0;
+    float accel_y = 0;
+    float accel_z = 0;
+    
+    
+    id<IXNMuseFileReader> fileReader =
+    [IXNMuseFileFactory museFileReaderWithPathString:filePath];
+    
+    while ([fileReader gotoNextMessage]) {
+        IXNMessageType type = [fileReader getMessageType];
+        
+        /*NSLog(@"type: %d, id: %d, timestamp: %lld",
+         (int)type, id_number, timestamp);*/
+        
+        switch(type) {
+            case IXNMessageTypeEeg:
+            {
+                IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                NSArray *eegData = packet.values;
+                //NSLog(@"orig time:%lld",packet.timestamp);
+                
+                NSNumber *timestamp = [NSNumber numberWithUnsignedLongLong:packet.timestamp];
+                //NSLog(@"timestamp:%@",timestamp);
+                
+                NSNumber *stim = [NSNumber numberWithBool:stimOn];
+                NSNumber *blink = [NSNumber numberWithBool:blinkOn];
+                
+                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":stim,@"blink":blink,@"accel_x":[NSNumber numberWithDouble:accel_x]};
+                
+                [exportData addObject:send];
+                
+                blinkOn = NO;
+                //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
+                break;
+            }
+            case IXNMessageTypeQuantization:
+            case IXNMessageTypeAccelerometer:
+            {
+                IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                accel_x = [packet.values[0] floatValue];
+                accel_y = [packet.values[1] floatValue];
+                accel_z = [packet.values[2] floatValue];
+                
+                break;
+            }
+            case IXNMessageTypeAnnotation:
+            {
+                IXNAnnotationData *annotation = [fileReader getAnnotation];
+                if ([annotation.data isEqualToString:@"stimOn"])
+                {
+                    stimOn = YES;
+                    //NSLog(@"stimOn");
+                }
+                else if ([annotation.data isEqualToString:@"stimOff"])
+                {
+                    stimOn = NO;
+                    //NSLog(@"stimOff");
+                }
+                else if ([annotation.data isEqualToString:@"blink"])
+                {
+                    blinkOn = YES;
+                }
+                //NSLog(@"annotation = %@", annotation.data);
+                
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    return exportData;
+}
 
 - (IBAction)exportToCloudStorageTapped:(id)sender {
     
@@ -271,9 +339,6 @@
     
     NSString *tmpFilePath = [documentsDirectory stringByAppendingPathComponent:tmpFileName];
     [data writeToFile:tmpFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    
-    //NSString *filePath =
-    //[documentsDirectory stringByAppendingPathComponent:filename];
     
     NSURL *url =  [NSURL fileURLWithPath:tmpFilePath];
     UIDocumentMenuViewController *docMenuVC = [[UIDocumentMenuViewController alloc]initWithURL:url inMode:UIDocumentPickerModeExportToService];

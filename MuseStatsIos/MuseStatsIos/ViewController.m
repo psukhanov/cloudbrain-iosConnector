@@ -8,6 +8,7 @@
 #import "LoggingListener.h"
 #import "SessionCell.h"
 #import "TuneViewController.h"
+#import "SessionDetailViewController.h"
 
 @interface ViewController ()
 
@@ -71,10 +72,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSFileManager *filemgr = [NSFileManager defaultManager];
     NSArray *filelist= [filemgr directoryContentsAtPath:documentsDirectory];
-    
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    app.nSessions = [NSNumber numberWithLong:[filelist count]];
-    
+        
     NSArray *sessions = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessions"];
     NSArray *savedFileNames;
     if (!sessions){
@@ -180,13 +178,6 @@
     
     int nMin = floor(secondsElapsed/60.0f);
     int nSec = fmod(secondsElapsed, 60);
-    
-    /*NSString *strDuration = [NSString stringWithFormat:@"%d m %d s",nMin,nSec];
-    static NSDateFormatter *dateFormatter;
-     if (!dateFormatter) {
-     dateFormatter = [[NSDateFormatter alloc] init];
-     dateFormatter.dateFormat = @"h:mm:ss a";  // very simple format  "8:47:22 AM"
-     }*/
     
     [self.lblSeconds setText:[NSString stringWithFormat:@"%02d Sec",nSec]];
     [self.lblMinutes setText:[NSString stringWithFormat:@"%02d Min",nMin]];
@@ -315,6 +306,11 @@
     return header;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 - (BOOL)tableView:(UITableView *)tableView
 canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -325,10 +321,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //remove the deleted object from your data source.
-        //If your data source is an NSMutableArray, do this
-        //[self.dataArray removeObjectAtIndex:indexPath.row];
-        //[tableView reloadData]; // tell table to refresh now
+
         if (self.sessionCell) {
             self.sessionCell = nil;
         }
@@ -487,17 +480,70 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }*/
 }
 
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([[segue identifier] isEqualToString:@"tuneSegue"]){
         TuneViewController *tune = (TuneViewController *)[segue destinationViewController];
         self.tuneDelegate = tune;
         tune.logger = self.delegate;
     }
+    else if ([[segue identifier] isEqualToString:@"sessionDetailSegue"])
+    {
+        NSIndexPath *selected = [self.tblSessions indexPathForSelectedRow];
+        SessionCell *cell = [self.tblSessions cellForRowAtIndexPath:[self.tblSessions indexPathForSelectedRow]];
+        
+        NSMutableDictionary *data = [[self.sessions objectAtIndex:selected.row] mutableCopy];
+        
+        NSArray *arr = [cell museFileToArray];
+        NSDictionary *dic = [self arrayOfDictionariesToDictionary:arr];
+        
+        [data setObject:dic forKey:@"channels"];
+        
+        [(SessionDetailViewController*)[segue destinationViewController] setSessionData:data];
+    }
 }
 
 -(IBAction)unwindSegue:(UIStoryboardSegue*)segue
 {
     
+}
+
+-(NSArray*)normalizeData:(NSArray*)data
+{
+    NSNumber *avg = [data valueForKeyPath:@"@avg.self"];
+    NSNumber *max = [data valueForKeyPath:@"@max.self"];
+    NSMutableArray *new = [NSMutableArray array];
+    for (NSNumber *num in data)
+    {
+        [new addObject:[NSNumber numberWithDouble:([num doubleValue] - [avg doubleValue])/[max doubleValue]]];
+    }
+    return new;
+}
+
+-(NSDictionary*)arrayOfDictionariesToDictionary:(NSArray*)array
+{
+    NSMutableDictionary *newDic = [@{} mutableCopy];
+    for (NSDictionary *dic in array)
+    {
+        
+        for (NSString *key in [dic allKeys])
+        {
+            NSNumber *value = [NSNumber numberWithDouble:[[dic objectForKey:key] doubleValue]];
+            
+            NSMutableArray *newArr = [newDic objectForKey:key];
+            if (!newArr)
+                newArr = [NSMutableArray array];
+            [newArr addObject:value];
+            [newDic setObject:newArr forKey:key];
+        }
+    }
+    
+    for (NSString *key in [newDic allKeys])
+    {
+        NSArray *arr = [newDic objectForKey:key];
+        arr = [self normalizeData:arr];
+        
+        [newDic setObject:arr forKey:key];
+    }
+    return newDic;
 }
 @end

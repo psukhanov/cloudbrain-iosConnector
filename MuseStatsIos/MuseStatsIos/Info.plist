@@ -29,6 +29,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Brainlog would like to log your location. This information will be kept private.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>external-accessory</string>

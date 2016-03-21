@@ -32,14 +32,14 @@
                                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sessionCell" rowHeight="90" id="PcE-xy-3PG" customClass="SessionCell">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="sessionCell" rowHeight="90" id="PcE-xy-3PG" customClass="SessionCell">
                                                         <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PcE-xy-3PG" id="iZi-0c-Etk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="287" height="89.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="745-Df-jXi">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="745-Df-jXi">
                                                                     <rect key="frame" x="228" y="31" width="84" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="84" id="7db-Re-Kao"/>
@@ -48,13 +48,13 @@
                                                                     <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="startDate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csR-am-FrS">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="startDate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csR-am-FrS">
                                                                     <rect key="frame" x="8" y="31" width="161" height="21"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                                     <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-uD-CLx">
+                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzM-uD-CLx">
                                                                     <rect key="frame" x="8" y="27" width="304" height="2"/>
                                                                 </progressView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Session #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moS-LY-XXY">
@@ -63,7 +63,7 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCC-cL-3vv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCC-cL-3vv">
                                                                     <rect key="frame" x="220" y="2" width="92" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="92" id="P6H-pU-LMf"/>
@@ -112,6 +112,7 @@
                                                             <outlet property="lblStartDate" destination="csR-am-FrS" id="Zox-Ws-i9f"/>
                                                             <outlet property="lblTitle" destination="moS-LY-XXY" id="DEV-ca-UWo"/>
                                                             <outlet property="progView" destination="yzM-uD-CLx" id="9Fk-G5-Wpk"/>
+                                                            <segue destination="tbQ-rz-C4c" kind="push" identifier="sessionDetailSegue" id="vZW-zI-VKC"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -285,6 +286,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-9" y="191"/>
+        </scene>
+        <!--Session Detail View Controller-->
+        <scene sceneID="KFC-bP-uto">
+            <objects>
+                <tableViewController id="tbQ-rz-C4c" customClass="SessionDetailViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" id="Z5M-6f-ugS">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dataCell" rowHeight="122" id="b0Q-z5-f92" customClass="dataCell">
+                                <rect key="frame" x="0.0" y="28" width="320" height="122"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b0Q-z5-f92" id="OPD-AD-lfP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="121.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osS-yd-y5e" customClass="rawDataView">
+                                            <rect key="frame" x="8" y="39" width="304" height="66.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duw-iB-jml">
+                                            <rect key="frame" x="8" y="10" width="125" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.90082465277777779" green="0.90082465277777779" blue="0.90082465277777779" alpha="1" colorSpace="calibratedRGB"/>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="dataCell"/>
+                                <connections>
+                                    <outlet property="dataView" destination="osS-yd-y5e" id="8lH-1w-3dK"/>
+                                    <outlet property="lblTitle" destination="duw-iB-jml" id="bHs-ms-1Sh"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tbQ-rz-C4c" id="UAa-9y-tX8"/>
+                            <outlet property="delegate" destination="tbQ-rz-C4c" id="Qbr-DY-SPS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="ppR-mN-fiR"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OCa-ix-KKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-9" y="866"/>
         </scene>
         <!--Audio Experiment-->
         <scene sceneID="C7v-8M-e5X">

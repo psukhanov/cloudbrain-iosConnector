@@ -20,6 +20,8 @@
 @property (nonatomic) NSIndexPath *indexPath;
 @property CGFloat uploadProgress;
 
+
+- (NSArray*)museFileToArray;
 -(void)setUpView;
 -(IBAction)exportSessionData;
 -(IBAction)exportSessionDataAsFile;
