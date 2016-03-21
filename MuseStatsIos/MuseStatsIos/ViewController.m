@@ -420,6 +420,18 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
+-(void)setHeadbandOnStatus:(BOOL)onStatus
+{
+    if (onStatus) {
+        [self.headBandOnStatus setText:@"You're wearing the headband"];
+        
+    }
+    else
+    {
+         [self.headBandOnStatus setText:@"You're not wearing the headband"];
+    }
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

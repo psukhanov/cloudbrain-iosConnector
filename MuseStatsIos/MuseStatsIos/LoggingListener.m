@@ -169,8 +169,9 @@
 }
 
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet {
-    if (!packet.headbandOn)
-        return;
+ 
+    //if (!packet.headbandOn)
+    //    return;
     if (!self.sawOneBlink) {
         self.sawOneBlink = YES;
         self.lastBlink = !packet.blink;
