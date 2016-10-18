@@ -20,6 +20,9 @@ extern NSString *const kExchangePassword;
 extern NSString *const kSessionBaseFileName;
 
 extern NSString *const kRecordingMode;
+extern NSString *const kSettingsOptionKey;
+extern double const kDistanceFilter;
+
 /*
 typedef enum recordingMode : NSUInteger {
     kRecordingModeRemoteOffline,

@@ -10,7 +10,6 @@
 
 @implementation rawDataView
 
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
@@ -18,21 +17,35 @@
 
     UIBezierPath *path = [UIBezierPath bezierPath];
     
-    CGFloat x = rect.origin.x;
-    CGFloat xppt = rect.size.width / self.data.count;
-    CGFloat y = rect.size.height/2;
-    [path moveToPoint:CGPointMake(x, y)];
-    
-    for (NSNumber *num in self.data)
+    NSArray *keys = [self.data allKeys];
+    for (NSString *key in keys)
     {
-        y = ([num floatValue] * rect.size.height) + rect.size.height/2;
-        x = x + xppt;
+        NSDictionary *channel = [self.data objectForKey:key];
+        UIColor *strokeColor = [channel objectForKey:@"color"];
+        NSArray *values = [channel objectForKey:@"values"];
+        if (!values)
+            return;
         
-        CGPoint next = CGPointMake(x,y);
-        [path addLineToPoint:next];
+        CGFloat x = rect.origin.x;
+        CGFloat xppt = rect.size.width / [values count];
+        CGFloat y = rect.size.height/2;
+        [path moveToPoint:CGPointMake(x, y)];
+        
+        int max = 2000 < [values count] ? 2000 : [values count];
+        
+        for (int i=0;i<max;i++)
+        {
+            NSNumber *num = values[i];
+            y = ([num floatValue] * rect.size.height) + rect.size.height/2;
+            x = x + xppt;
+            
+            CGPoint next = CGPointMake(x,y);
+            [path addLineToPoint:next];
+        }
+        [strokeColor setStroke];
+        [path stroke];
     }
-    [[UIColor blackColor] setStroke];
-    [path stroke];
+
 }
 
 

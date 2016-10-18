@@ -14,7 +14,9 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *lblTitle;
 @property (nonatomic, strong) IBOutlet rawDataView *dataView;
-@property (nonatomic, strong) NSArray *plotData;
+@property (nonatomic, strong) NSDictionary *plotData;
+@property (nonatomic, strong) IBOutlet UIView *legendView1, *legendView2, *legendView3, *legendView4;
+@property (nonatomic, strong) IBOutlet UILabel *legendLabel1, *legendLabel2, *legendLabel3, *legendLabel4;
 
 -(void)configureCell;
 

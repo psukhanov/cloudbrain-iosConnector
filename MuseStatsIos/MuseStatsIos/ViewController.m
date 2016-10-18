@@ -22,14 +22,14 @@
 
 @implementation ViewController
 
-
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self loadData];
     [self.scroll setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearKeyboard)];
-    [self.view addGestureRecognizer:bgTap];
+    //[self.view addGestureRecognizer:bgTap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -297,19 +297,17 @@
     
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 310, 20)];
     [lbl setTextAlignment:NSTextAlignmentCenter];
-    
     [lbl setFont:[UIFont fontWithName:@"HelveticaNeue" size:18.0]];
-    
     [lbl setText:@"Recorded Sessions"];
     
     [header addSubview:lbl];
     return header;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//}
 
 - (BOOL)tableView:(UITableView *)tableView
 canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -330,9 +328,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
        
         NSString *message = [NSString stringWithFormat:@"%@ will be permanently deleted. Proceed?",[self.sessionCell.sessionData objectForKey:@"fileName"]];
         [[[UIAlertView alloc] initWithTitle:@"Are you sure?" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Proceed", nil]show];
-        
     }
-
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -493,6 +489,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
     if([[segue identifier] isEqualToString:@"tuneSegue"]){
         TuneViewController *tune = (TuneViewController *)[segue destinationViewController];
         self.tuneDelegate = tune;
@@ -506,12 +503,25 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         NSMutableDictionary *data = [[self.sessions objectAtIndex:selected.row] mutableCopy];
         
         NSArray *arr = [cell museFileToArray];
+        //NSLog(@"muse file array:%@",arr);
+        
+        // data re-formatting a computational bottleneck? -- NOPE
         NSDictionary *dic = [self arrayOfDictionariesToDictionary:arr];
-        
-        [data setObject:dic forKey:@"channels"];
-        
-        [(SessionDetailViewController*)[segue destinationViewController] setSessionData:data];
+        NSLog(@"dic:%@",dic);
+
+        NSDictionary *sessionData = @{@"Raw":
+                                        @{@"ch_0":dic[@"channel_0"],
+                                          @"ch_1":dic[@"channel_1"]},
+                                      @"Acceleration":
+                                          @{@"x":dic[@"accel_x"]},
+                                      @"Alpha":
+                                          @{@"al_0":dic[@"alpha_0"]}
+                                      };
+        //[data setObject:dic forKey:@"EEG"];
+        [(SessionDetailViewController*)[segue destinationViewController] setSessionData:sessionData];
     }
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 -(IBAction)unwindSegue:(UIStoryboardSegue*)segue
@@ -526,17 +536,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     NSMutableArray *new = [NSMutableArray array];
     for (NSNumber *num in data)
     {
-        [new addObject:[NSNumber numberWithDouble:([num doubleValue] - [avg doubleValue])/[max doubleValue]]];
+        if ([max doubleValue] != 0)
+            [new addObject:[NSNumber numberWithDouble:([num doubleValue] - [avg doubleValue])/[max doubleValue]]];
+        else
+            [new addObject:[NSNumber numberWithDouble:0]];
     }
     return new;
 }
 
 -(NSDictionary*)arrayOfDictionariesToDictionary:(NSArray*)array
 {
+    NSLog(@"starting dic to dic%@",[NSDate date]);
+    
     NSMutableDictionary *newDic = [@{} mutableCopy];
     for (NSDictionary *dic in array)
     {
-        
         for (NSString *key in [dic allKeys])
         {
             NSNumber *value = [NSNumber numberWithDouble:[[dic objectForKey:key] doubleValue]];
@@ -556,6 +570,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         
         [newDic setObject:arr forKey:key];
     }
+    
+    NSLog(@"ending dic to dic%@",[NSDate date]);
+
     return newDic;
 }
 @end

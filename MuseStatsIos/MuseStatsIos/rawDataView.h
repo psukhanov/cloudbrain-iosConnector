@@ -10,6 +10,6 @@
 
 @interface rawDataView : UIView
 
-@property (nonatomic) NSArray *data; 
+@property (nonatomic) NSDictionary *data;
 
 @end

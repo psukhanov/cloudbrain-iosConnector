@@ -34,13 +34,12 @@
     _deviceName = @"Paul-Muse";
     _deviceType = @"muse";
     _metric = @"eeg";
-    _saveFileName = @"MyFile";
     _arrBuffer = [NSMutableArray array];
     
     _shouldRecordData = NO;
     
     _rmqclient = [RabbitMQClient sharedClient];
-    [_rmqclient setupWithExchangeName:[self exchangeName]];
+    /*[_rmqclient setupWithExchangeName:[self exchangeName]];
     
     @try {
         RabbitMQClient *client = [RabbitMQClient sharedClient];
@@ -51,7 +50,7 @@
     }
     @finally {
         //NSLog(@"sent RabbitMQ message");
-    }
+    }*/
 
     /**
      * Set <key>UIFileSharingEnabled</key> to true in Info.plist if you want
@@ -62,7 +61,6 @@
 }
 
 - (void)receiveMuseDataPacket:(IXNMuseDataPacket *)packet {
-    
     
     if (packet.packetType == IXNMuseDataPacketTypeHorseshoe){
         for (NSInteger i=0;i<packet.values.count;i++)
@@ -119,7 +117,6 @@
                 if (self.viewController.tuneDelegate && self.viewController.tuneDelegate.isPlaying)
                 {
                     playing = [NSNumber numberWithBool:YES];
-
                 }
                 
                 [self.arrBuffer addObject:@{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":playing}];
@@ -146,10 +143,31 @@
             }
             case IXNMuseDataPacketTypeAlphaAbsolute:
             {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeAlphaAbsolute packet:packet];
+                NSLog(@"alpha packet received:%@",packet);
+                
                 break;
             }
             case IXNMuseDataPacketTypeBetaAbsolute:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeBetaAbsolute packet:packet];
                 break;
+            }
+            case IXNMuseDataPacketTypeGammaAbsolute:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeGammaAbsolute packet:packet];
+                break;
+            }
+            case IXNMuseDataPacketTypeDeltaAbsolute:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeDeltaAbsolute packet:packet];
+                break;
+            }
+            case IXNMuseDataPacketTypeThetaAbsolute:
+            {
+                [self.fileWriter addDataPacket:IXNMuseDataPacketTypeThetaAbsolute packet:packet];
+                break;
+            }
             default:
                 break;
         }
@@ -165,8 +183,13 @@
     }
     else
         [self.fileWriter addAnnotationString:1 annotation:@"stimOff"];
-
 }
+
+-(void)logLocation:(NSString*)locationJSON
+{
+    [self.fileWriter addAnnotationString:1 annotation:locationJSON];
+}
+
 
 - (void)receiveMuseArtifactPacket:(IXNMuseArtifactPacket *)packet {
  
@@ -214,6 +237,7 @@
     NSLog(@"connect: %@", state);
     if (packet.currentConnectionState == IXNConnectionStateConnected) {
         [self.delegate sayHi];
+
     } else if (packet.currentConnectionState == IXNConnectionStateDisconnected) {
         [self.delegate performSelector:@selector(reconnectToMuse)
                             withObject:nil

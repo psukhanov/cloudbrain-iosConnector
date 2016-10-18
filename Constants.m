@@ -11,7 +11,8 @@
 @implementation Constants
 
 NSString *const kHostName = @"rabbitmq.cloudbrain.rocks";
-NSString *const kMyndzpaceHost = @"http://104.131.140.175:12344";
+//NSString *const kMyndzpaceHost = @"https://104.131.140.175:12344";
+NSString *const kMyndzpaceHost = @"https://paulsukhanov.com:12344";
 
 //NSString *const kHostName = @"104.131.140.175";
 int const kPortNumber = 5672;
@@ -19,8 +20,10 @@ int const kPortNumber = 5672;
 NSString *const kExchangeUsername = @"cloudbrain";
 NSString *const kExchangePassword = @"cloudbrain";
 NSString *const kSessionBaseFileName = @"session_";
-//NSString *const kRecordingMode = @"remote-online";
 
+//NSString *const kRecordingMode = @"remote-online";
 NSString *const kRecordingMode = @"local";
+NSString *const kSettingsOptionKey = @"settingsOptions";
+double const kDistanceFilter = 4;
 
 @end

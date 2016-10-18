@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0012DAD81CAB428E00BB61D7 /* LogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0012DAD71CAB428E00BB61D7 /* LogoView.m */; };
 		003807AC1C6AC863006050B4 /* Icon_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 003807AB1C6AC863006050B4 /* Icon_1024.png */; };
 		005ECA301C52051D0036B5AD /* 200px-Green-dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */; };
 		005ECA311C52051D0036B5AD /* 250px-Grey-dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 005ECA2F1C52051D0036B5AD /* 250px-Grey-dot.png */; };
@@ -65,6 +66,8 @@
 		00E84C071C0E1FCA0015E0DC /* amqp_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84C081C0E1FCA0015E0DC /* amqp_url.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */; settings = {COMPILER_FLAGS = "-DHAVE_HTONLL"; }; };
 		00E84C0A1C0E239B0015E0DC /* config.h in Sources */ = {isa = PBXBuildFile; fileRef = 00E84C091C0E233D0015E0DC /* config.h */; };
+		00FE244D1CB33BA900065C35 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE244C1CB33BA900065C35 /* SettingsViewController.m */; };
+		00FE24501CB9C10300065C35 /* settingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE244F1CB9C10300065C35 /* settingCell.m */; };
 		3A9A806C1C5B24260041AA35 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A806B1C5B24260041AA35 /* CloudKit.framework */; };
 		5401E01E1A93DA2600FADC22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E01D1A93DA2600FADC22 /* main.m */; };
 		5401E0211A93DA2600FADC22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401E0201A93DA2600FADC22 /* AppDelegate.m */; };
@@ -89,6 +92,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0012DAD61CAB428E00BB61D7 /* LogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoView.h; sourceTree = "<group>"; };
+		0012DAD71CAB428E00BB61D7 /* LogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoView.m; sourceTree = "<group>"; };
 		003807AB1C6AC863006050B4 /* Icon_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_1024.png; sourceTree = "<group>"; };
 		005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "200px-Green-dot.png"; sourceTree = "<group>"; };
 		005ECA2F1C52051D0036B5AD /* 250px-Grey-dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "250px-Grey-dot.png"; sourceTree = "<group>"; };
@@ -176,6 +181,10 @@
 		00E84BFA1C0E1FCA0015E0DC /* amqp_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_time.c; sourceTree = "<group>"; };
 		00E84BFB1C0E1FCA0015E0DC /* amqp_url.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amqp_url.c; sourceTree = "<group>"; };
 		00E84C091C0E233D0015E0DC /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../build/librabbitmq/config.h; sourceTree = "<group>"; };
+		00FE244B1CB33BA900065C35 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		00FE244C1CB33BA900065C35 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		00FE244E1CB9C10300065C35 /* settingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingCell.h; sourceTree = "<group>"; };
+		00FE244F1CB9C10300065C35 /* settingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingCell.m; sourceTree = "<group>"; };
 		3A9A806A1C5B24210041AA35 /* MuseStatsIos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = MuseStatsIos.entitlements; path = MuseStatsIos/MuseStatsIos.entitlements; sourceTree = "<group>"; };
 		3A9A806B1C5B24260041AA35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5401E0181A93DA2600FADC22 /* MuseStatsIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseStatsIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,8 +234,8 @@
 			children = (
 				00CC86FD1C6DAF3E00876DB3 /* Icon_512.png */,
 				00B82EA81C7C3D9E00900ED8 /* Icon_320_240@2x.png */,
-				00A391441C7C4C5200A6A3F5 /* 40px-Grey-dot@2x.png */,
 				003807AB1C6AC863006050B4 /* Icon_1024.png */,
+				00A391441C7C4C5200A6A3F5 /* 40px-Grey-dot@2x.png */,
 				009102411C5AE86300E98504 /* icon_120.png */,
 				009102421C5AE86300E98504 /* icon_180.png */,
 				005ECA2E1C52051D0036B5AD /* 200px-Green-dot.png */,
@@ -386,14 +395,20 @@
 				5401E0231A93DA2600FADC22 /* ViewController.m */,
 				0081E3FF1C40B611002AEFF4 /* SessionCell.h */,
 				0081E4001C40B611002AEFF4 /* SessionCell.m */,
-				009102451C5D633D00E98504 /* TuneViewController.h */,
-				009102461C5D633D00E98504 /* TuneViewController.m */,
 				00E5A80C1CA06F5F004D5E0E /* SessionDetailViewController.h */,
 				00E5A80D1CA06F5F004D5E0E /* SessionDetailViewController.m */,
 				00E5A8111CA079CC004D5E0E /* dataCell.h */,
 				00E5A8121CA079CC004D5E0E /* dataCell.m */,
 				00AC9D021C96675F00F2757C /* rawDataView.h */,
 				00AC9D031C96675F00F2757C /* rawDataView.m */,
+				00FE244B1CB33BA900065C35 /* SettingsViewController.h */,
+				00FE244C1CB33BA900065C35 /* SettingsViewController.m */,
+				00FE244E1CB9C10300065C35 /* settingCell.h */,
+				00FE244F1CB9C10300065C35 /* settingCell.m */,
+				009102451C5D633D00E98504 /* TuneViewController.h */,
+				009102461C5D633D00E98504 /* TuneViewController.m */,
+				0012DAD61CAB428E00BB61D7 /* LogoView.h */,
+				0012DAD71CAB428E00BB61D7 /* LogoView.m */,
 				5401E0281A93DA2600FADC22 /* Images.xcassets */,
 				5401E02A1A93DA2600FADC22 /* LaunchScreen.xib */,
 				5401E01B1A93DA2600FADC22 /* Supporting Files */,
@@ -570,12 +585,14 @@
 				00E84C0A1C0E239B0015E0DC /* config.h in Sources */,
 				00B959011BFEA9C4001C2233 /* Constants.m in Sources */,
 				00E84C061C0E1FCA0015E0DC /* amqp_tcp_socket.c in Sources */,
+				00FE244D1CB33BA900065C35 /* SettingsViewController.m in Sources */,
 				00B957951BFEA658001C2233 /* AMQPConnection.m in Sources */,
 				00B957941BFEA658001C2233 /* AMQPChannel.m in Sources */,
 				00E84BFC1C0E1FCA0015E0DC /* amqp_api.c in Sources */,
 				00B959041BFEAFB2001C2233 /* RabbitMQClient.m in Sources */,
 				00AC9D041C96675F00F2757C /* rawDataView.m in Sources */,
 				00E5A80F1CA06F5F004D5E0E /* SessionDetailViewController.m in Sources */,
+				0012DAD81CAB428E00BB61D7 /* LogoView.m in Sources */,
 				00CF0E001C1D3D85009DFF4B /* AudioPlayer.m in Sources */,
 				00E84C021C0E1FCA0015E0DC /* amqp_openssl_hostname_validation.c in Sources */,
 				00B957971BFEA658001C2233 /* AMQPConsumerThread.m in Sources */,
@@ -599,6 +616,7 @@
 				00E84C031C0E1FCA0015E0DC /* amqp_openssl.c in Sources */,
 				00E84C071C0E1FCA0015E0DC /* amqp_time.c in Sources */,
 				00E84C041C0E1FCA0015E0DC /* amqp_socket.c in Sources */,
+				00FE24501CB9C10300065C35 /* settingCell.m in Sources */,
 				00B9579B1BFEA658001C2233 /* AMQPQueue.m in Sources */,
 				5401E01E1A93DA2600FADC22 /* main.m in Sources */,
 				009102471C5D633D00E98504 /* TuneViewController.m in Sources */,

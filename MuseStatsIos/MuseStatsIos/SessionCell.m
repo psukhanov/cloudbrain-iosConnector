@@ -160,6 +160,8 @@
     float accel_z = 0;
     
     
+    //NSDictionary *settings = [[NSUserDefaults standardUserDefaults] objectForKey:kSettingsOptionKey];
+    
     [strFileData appendFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@\n",@"timestamp",@"channel_1",@"channel_2",@"channel_3",@"channel_4",@"stimulus", @"blink",@"accel_x",@"accel_y",@"accel_z"];
     
     id<IXNMuseFileReader> fileReader =
@@ -254,7 +256,11 @@
     float accel_x = 0;
     float accel_y = 0;
     float accel_z = 0;
-    
+    NSArray *alpha = [NSArray arrayWithObject:[NSNumber numberWithDouble:0]];
+    NSArray *beta = [NSArray arrayWithObject:[NSNumber numberWithDouble:0]];
+    NSArray *gamma = [NSArray arrayWithObject:[NSNumber numberWithDouble:0]];
+    NSArray *delta = [NSArray arrayWithObject:[NSNumber numberWithDouble:0]];
+
     
     id<IXNMuseFileReader> fileReader =
     [IXNMuseFileFactory museFileReaderWithPathString:filePath];
@@ -262,13 +268,22 @@
     while ([fileReader gotoNextMessage]) {
         IXNMessageType type = [fileReader getMessageType];
         
-        /*NSLog(@"type: %d, id: %d, timestamp: %lld",
-         (int)type, id_number, timestamp);*/
-        
         switch(type) {
             case IXNMessageTypeEeg:
             {
                 IXNMuseDataPacket* packet = [fileReader getDataPacket];
+                NSLog(@"data packet type:%d",(int)packet.packetType);
+                if (packet.packetType == IXNMuseDataPacketTypeAlphaAbsolute)
+                {
+                    NSLog(@"alpha packet type:");
+                    alpha = packet.values;
+                    break;
+                }
+                else if (packet.packetType == IXNMuseDataPacketTypeBetaAbsolute)
+                {
+                    beta = packet.values;
+                }
+                
                 NSArray *eegData = packet.values;
                 //NSLog(@"orig time:%lld",packet.timestamp);
                 
@@ -278,12 +293,30 @@
                 NSNumber *stim = [NSNumber numberWithBool:stimOn];
                 NSNumber *blink = [NSNumber numberWithBool:blinkOn];
                 
-                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":stim,@"blink":blink,@"accel_x":[NSNumber numberWithDouble:accel_x]};
+                NSNumber *alpha_0 = [NSNumber numberWithDouble:0];
+                if (alpha && [alpha count] > 0)
+                    alpha_0 = alpha[0];
+                
+                NSDictionary *send = @{@"timestamp":timestamp,@"channel_0":eegData[0],@"channel_1":eegData[1],@"channel_2":eegData[2],@"channel_3":eegData[3],@"stimOn":stim,@"blink":blink,@"accel_x":[NSNumber numberWithDouble:accel_x],@"alpha_0":alpha_0};
                 
                 [exportData addObject:send];
                 
                 blinkOn = NO;
                 //NSLog(@"eeg data packet = %f", [packet.values[IXNEegTP9] doubleValue]);
+                break;
+            }
+            case IXNMessageTypeAlgValue:
+            {
+                NSLog(@"alg value:");
+                break;
+            }
+//            case IXNMessageTypeMuseElements:
+//            {
+//                
+//            }
+            case IXNMessageTypeDsp:
+            {
+                NSLog(@"dsp:");
                 break;
             }
             case IXNMessageTypeQuantization:

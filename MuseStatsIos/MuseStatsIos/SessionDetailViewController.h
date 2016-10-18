@@ -11,6 +11,8 @@
 @interface SessionDetailViewController : UITableViewController
 
 @property (nonatomic, strong) NSDictionary *sessionData;
-@property (nonatomic, strong) NSArray *displayOptions;
+//@property (nonatomic, strong) NSArray *displayOptions;
+@property (nonatomic, strong) NSMutableDictionary *displayOptions;
+
 
 @end

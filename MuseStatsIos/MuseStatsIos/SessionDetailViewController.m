@@ -18,8 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.displayOptions = @[@"channel_0",@"channel_1",@"accel_x",@"blink"];
+    //self.displayOptions = @[@"channel_0",@"channel_1",@"accel_x",@"blink"];
+    self.displayOptions = [@{@"EEG":@[@"channel_0",@"channel_1"],@"accel":@[@"x",@"y",@"z"],@"other":@[@"blink"]} mutableCopy];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"Session Details";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,22 +29,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    //return [[self.displayOptions allKeys] count];
+    //return [[self.sessionData allKeys] count];
+    return 1;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.displayOptions count];
+    NSArray *keys = [self.sessionData allKeys];
+    return [keys count];
+    
+    //NSString *key = [keys objectAtIndex:section];
+    //NSArray *options = self.sessionData[key];
+    
+    //return [options count];
+    
+    //return [self.displayOptions count];
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     dataCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell"];
-    NSString *option = [self.displayOptions objectAtIndex:indexPath.row];
+   // NSArray *keys = [self.displayOptions allKeys];
+    NSArray *keys = [self.sessionData allKeys];
+
+    NSString *key = [keys objectAtIndex:indexPath.row];
     
-    NSDictionary *data = [self.sessionData objectForKey:@"channels"];
-    cell.plotData = [data objectForKey:option];
-    [cell.lblTitle setText:option];
+   // NSArray *options = self.displayOptions[key];
+    NSDictionary *channels = self.sessionData[key];
+    
+    cell.plotData = channels;
     
     [cell configureCell];
-    
+    [cell.lblTitle setText:key];
+
     return cell;
 }
 
